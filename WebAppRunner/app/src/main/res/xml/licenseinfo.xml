@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/license">
+        <EditTextPreference
+            android:key="deviceid"
+            android:summary=""
+            android:title="@string/device_id" />
+        <EditTextPreference
+            android:key="licensetype"
+            android:summary=""
+            android:title="@string/license_type" />
+        <EditTextPreference
+            android:key="licensedate"
+            android:summary=""
+            android:title="@string/license_date" />
+        <EditTextPreference
+            android:key="licenselastchk"
+            android:summary=""
+            android:title="@string/license_lastchk" />
+    </PreferenceCategory>
+</PreferenceScreen>
