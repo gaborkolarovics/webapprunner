@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">WebAppRunner</string>
+    <string name="web_settings">Alkalmazás beállítás</string>
+    <string name="url">Url</string>
+    <string name="license">Licenc</string>
+    <string name="license_type">Licenc típus</string>
+    <string name="license_date">Licenc dátum</string>
+    <string name="license_lastchk">Licenc utolsó ellenőrzés</string>
+	<string name="license_error">Licenc hiba!</string>
+	<string name="license_error_version">Licenc hiba! Hibás program verzió : %1$s"</string>
+	<string name="license_expire">Licenc lejárati dátuma : %1$s</string>
+    <string name="device_id">Eszköz azonosító</string>
+    <string name="btn_save">Mentés</string>
+    <string name="btn_clear">Törlés</string>
+    <string name="btn_cancel">Mégse</string>
+    <string name="btn_ok">Ok</string>
+	<string name="btn_yes">Igen</string>
+	<string name="btn_no">Nem</string>
+	<string name="page_reload">Oldal frissítés</string>
+	<string name="open_config">Beállítások</string>
+    <string name="netEnabled">Hálózati helymeghatározás engedélyezve..</string>
+    <string name="gpsEnabled">GPS helymeghatározás engedélyezve..</string>
+    <string name="please_wait">Kérlek várj!</string>
+	<string name="please_wait_time">Kérlek várj! [%1$d]</string>
+    <string name="title_signature">Aláírás</string>
+    <string name="title_location">Helymeghatározás</string>
+	<string name="title_shortcut">Parancsikon készítés</string>
+	<string name="question_exit">Valóban ki akarsz lépni a programból?</string>
+	<string name="location_disabled">A helymeghatározás ki van kapcsolva. Kérlek engedélyezd!</string>
+	<string name="loc_coor">Lng: %1$3.6f; Lat: %2$3.6f</string>
+	<string name="loc_accu">Pontosság: %1$.0f m [%2$s]</string>
+	<string name="fullscreen_mode">Teljes képernyő</string>
+	<string name="settings_after_restart">Újraindítás szükséges hozzá.</string>
+	<string name="get_url_data">Ikon adatok letöltése</string>
+	<string name="add_shortcut">Ikon létrehozása</string>
+	
+</resources>
+

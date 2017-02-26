@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="120dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/locget"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight=".35"
+            android:text="@string/btn_ok" />
+
+        <Button
+            android:id="@+id/loccancel"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight=".30"
+            android:text="@string/btn_cancel" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/tvAccuracy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="" />
+
+</LinearLayout>
+
