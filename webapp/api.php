@@ -63,6 +63,7 @@ function chkLicence() {
     } else {
         $decrypted = $mcrypt->decrypt($DataFromBase64);
     }
+      $Devices->LastCheck = date("Y-m-d", time ());
 		$getData = json_decode($decrypted, true);
 		$ExistDevice = $Devices->find(array('DeviceID' => $getData['deviceid'] ));
 		if(count($ExistDevice) > 0) {
