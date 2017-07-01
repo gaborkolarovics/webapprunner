@@ -1,2 +1,6 @@
+/.idea
+/webapp/.buildpath
+/webapp/.project
+/webapp/.settings/*
 /WebAppRunner/.aidedropbox
 /WebAppRunner/app/build/*
