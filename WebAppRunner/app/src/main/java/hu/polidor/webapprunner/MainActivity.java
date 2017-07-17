@@ -54,7 +54,7 @@ public class MainActivity extends Activity
     public static final String FINELOCATION_MINDIST = "mindistance";
     public static final String FINELOCATION_MINTIME = "mintimeout";
 
-    public static final String WEBAPP_DEFAULT_URL = "http://polidor-kkt.hu";
+    public static final String WEBAPP_DEFAULT_URL = "file:///android_asset/index.html"; // "http://polidor-kkt.hu";
     public static final String WEBAPP_CONFIG_URL = "webappurl";
     public static final String WEBAPP_CONFIG_DEVICEID = "deviceid";
     public static final String WEBAPP_CONFIG_LICENSETYPE = "licensetype";
@@ -75,7 +75,6 @@ public class MainActivity extends Activity
     public ProgressBar pbStatus;
     public WebView webView;
     public SharedPreferences sharedPref;
-    public BroadcastReceiver webappLicenseReceiver = null;
     public SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     public WebAppWebViewClient webappWebViewClient = null;
     public String deviceId;
@@ -156,11 +155,6 @@ public class MainActivity extends Activity
             e.printStackTrace();
         }
 
-        if (webappLicenseReceiver == null)
-		{
-            webappLicenseReceiver = new WebAppLicenseReceiver(webView);
-        }
-
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 		if (sharedPref.getBoolean(WEBAPP_CONFIG_FULLSCREEN, false))
 		{
@@ -173,12 +167,6 @@ public class MainActivity extends Activity
             sharedPref.edit().putString(WEBAPP_CONFIG_DEVICEID, deviceId).apply();
         }
         appurl = getURL(getIntent(), false);
-        String licenseLastChk = sharedPref.getString(WEBAPP_CONFIG_LICENSECHK, "1901-01-01");
-        if (!dateFormat.format(new Date()).equalsIgnoreCase(licenseLastChk))
-		{
-            WebAppLicenseSender task = new WebAppLicenseSender(getApplicationContext());
-            task.execute(deviceId);
-        }
         registerReceiver();
 
         if (checkPlayServices())
@@ -286,14 +274,12 @@ public class MainActivity extends Activity
     protected void onResume()
 	{
         super.onResume();
-        LocalBroadcastManager.getInstance(this).registerReceiver(webappLicenseReceiver, new IntentFilter(WEBAPP_INTENT_LICENSERESP));
         registerReceiver();
     }
 
     @Override
     protected void onPause()
 	{
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(webappLicenseReceiver);
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
         isReceiverRegistered = false;
         super.onPause();
