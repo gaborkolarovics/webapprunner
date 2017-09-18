@@ -30,21 +30,6 @@ public class WebAppSettings extends PreferenceActivity {
             Preference prefDeviceId = findPreference(MainActivity.WEBAPP_CONFIG_DEVICEID);
             prefDeviceId.setSummary(deviceId);
             prefDeviceId.setEnabled(false);
-
-            String licenseType = getPreferenceManager().getSharedPreferences().getString(MainActivity.WEBAPP_CONFIG_LICENSETYPE, "Demo");
-            Preference prefLicenseType = findPreference(MainActivity.WEBAPP_CONFIG_LICENSETYPE);
-            prefLicenseType.setSummary(licenseType);
-            prefLicenseType.setEnabled(false);
-
-            String licenseDate = getPreferenceManager().getSharedPreferences().getString(MainActivity.WEBAPP_CONFIG_LICENSEDATE, "n/a");
-            Preference prefLicenseDate = findPreference(MainActivity.WEBAPP_CONFIG_LICENSEDATE);
-            prefLicenseDate.setSummary(licenseDate);
-            prefLicenseDate.setEnabled(false);
-
-            String licenseLastChk = getPreferenceManager().getSharedPreferences().getString(MainActivity.WEBAPP_CONFIG_LICENSECHK, "");
-            Preference prefLicenseChk = findPreference(MainActivity.WEBAPP_CONFIG_LICENSECHK);
-            prefLicenseChk.setSummary(licenseLastChk);
-            prefLicenseChk.setEnabled(false);
         }
 
     }
