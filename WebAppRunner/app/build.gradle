@@ -8,8 +8,8 @@ android {
         applicationId "hu.polidor.webapprunner"
         minSdkVersion 14
         targetSdkVersion 16
-        versionCode 8
-        versionName "1.4.b8"
+        versionCode 9
+        versionName "1.5.b9"
     }
     buildTypes {
         release {
