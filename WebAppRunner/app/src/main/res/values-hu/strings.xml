@@ -27,6 +27,7 @@
     <string name="title_signature">Aláírás</string>
     <string name="title_location">Helymeghatározás</string>
 	<string name="title_shortcut">Parancsikon készítés</string>
+	<string name="title_donation">Adományozás</string>
 	<string name="question_exit">Valóban ki akarsz lépni a programból?</string>
 	<string name="location_disabled">A helymeghatározás ki van kapcsolva. Kérlek engedélyezd!</string>
 	<string name="loc_coor">Lng: %1$3.6f; Lat: %2$3.6f</string>
