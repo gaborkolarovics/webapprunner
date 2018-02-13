@@ -21,6 +21,6 @@
 	<Button android:id ="@+id/btnDonation"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:text="Donate" />
+		android:text="@string/title_donation" />
 
 </LinearLayout>

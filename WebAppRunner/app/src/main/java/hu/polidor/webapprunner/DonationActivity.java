@@ -51,7 +51,7 @@ public class DonationActivity  extends FragmentActivity
         DonationsFragment donationsFragment;
 		donationsFragment = DonationsFragment.newInstance(false, true, GOOGLE_PUBKEY, GOOGLE_CATALOG,
 														  getResources().getStringArray(R.array.donation_google_catalog_values), true, PAYPAL_USER, PAYPAL_CURRENCY_CODE,
-														  getString(R.string.donation_paypal_item), false, FLATTR_URL, FLATTR_PROJECT_URL, true, BITCOIN_ADDRESS);
+														  getString(R.string.donation_paypal_item), false, FLATTR_URL, FLATTR_PROJECT_URL, false, BITCOIN_ADDRESS);
         ft.replace(R.id.donations_activity_container, donationsFragment, "donationsFragment");
         ft.commit();
     }
