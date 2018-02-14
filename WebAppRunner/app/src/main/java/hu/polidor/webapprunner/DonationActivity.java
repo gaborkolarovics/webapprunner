@@ -35,7 +35,7 @@ public class DonationActivity  extends FragmentActivity
     /**
      * Bitcoin
      */
-    private static final String BITCOIN_ADDRESS = "12Y6zbBYoRxf8kBrjau3WedjtzvcACvPMk";
+    private static final String BITCOIN_ADDRESS = "1Kope1L96RAPFGpG7wSF6HaZfkF9JQ4TRJ";
 
     /**
      * Called when the activity is first created.
