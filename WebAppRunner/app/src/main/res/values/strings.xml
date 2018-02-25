@@ -40,8 +40,8 @@
 	<string name="gcm_defaultSenderId">517920729052</string>
 
 	<string-array name="donation_google_catalog_values">
-        <item>5 €</item>
-        <item>10 €</item>
+        <item>NFC (Small)</item>
+        <item>NFC (Big)</item>
     </string-array>
 
     <string name="donation_paypal_item">Donation</string>
