@@ -54,24 +54,22 @@ public class MainActivity extends Activity
     public static final String FINELOCATION_MINDIST = "mindistance";
     public static final String FINELOCATION_MINTIME = "mintimeout";
 
-    public static final String WEBAPP_DEFAULT_URL = "file:///android_asset/index.html"; // "http://polidor-kkt.hu";
+    public static final String WEBAPP_DEFAULT_URL = "file:///android_asset/index.html";
+	public static final String WEBAPP_SERVER_URL = "http://polidor-kkt.hu";
     public static final String WEBAPP_CONFIG_URL = "webappurl";
     public static final String WEBAPP_CONFIG_DEVICEID = "deviceid";
     public static final String WEBAPP_CONFIG_LICENSETYPE = "licensetype";
     public static final String WEBAPP_CONFIG_LICENSEDATE = "licensedate";
     public static final String WEBAPP_CONFIG_LICENSECHK = "licenselastchk";
-    public static final String WEBAPP_CONFIG_LICENSEPRGVER = "programversion";
+	public static final String WEBAPP_CONFIG_LICENSEPRGVER = "programversion";
     public static final String WEBAPP_CONFIG_LICENSEVER = "licenseversion";
 	public static final String WEBAPP_CONFIG_FULLSCREEN = "fullscreen";
 
-    public static final String WEBAPP_INTENT_DATANAME = "JsonData";
-    public static final String WEBAPP_INTENT_LICENSERESP = "webapplicenseresp";
     public static final String WEBAPP_INTENT_URL = "intenturl";
 
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     public static final String REGISTRATION_COMPLETE = "registrationComplete";
 
-    public static String AppVersion = "";
     public ProgressBar pbStatus;
     public WebView webView;
     public SharedPreferences sharedPref;
@@ -146,14 +144,6 @@ public class MainActivity extends Activity
 		SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         webView = (WebView) findViewById(R.id.webview);
         pbStatus = (ProgressBar) findViewById(R.id.pbProgress);
-        try
-		{
-            AppVersion = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
-        }
-		catch (PackageManager.NameNotFoundException e)
-		{
-            e.printStackTrace();
-        }
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 		if (sharedPref.getBoolean(WEBAPP_CONFIG_FULLSCREEN, false))
@@ -309,6 +299,7 @@ public class MainActivity extends Activity
 			Button btnRefresh = (Button) exitView.findViewById(R.id.btnRefresh);
 			Button btnSettings = (Button) exitView.findViewById(R.id.btnSettings);
 			Button btnShortcut = (Button) exitView.findViewById(R.id.btnShortcut);
+			Button btnDonation = (Button) exitView.findViewById(R.id.btnDonation);
             builder.setView(exitView);
 			builder.setMessage(R.string.question_exit)
 				.setCancelable(false)
@@ -349,6 +340,15 @@ public class MainActivity extends Activity
 						alert.dismiss();
 						Intent i = new Intent();
 						i.setClass(mContext, UrlShortcut.class);
+						startActivity(i);
+                    }
+                });
+			btnDonation.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v)
+					{
+						alert.dismiss();
+						Intent i = new Intent();
+						i.setClass(mContext, DonationActivity.class);
 						startActivity(i);
                     }
                 });

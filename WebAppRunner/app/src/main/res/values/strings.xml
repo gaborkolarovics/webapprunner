@@ -27,6 +27,7 @@
     <string name="title_signature">Signature Confirmation</string>
     <string name="title_location">Get fine location</string>
 	<string name="title_shortcut">Create shortcut</string>
+	<string name="title_donation">Donation</string>
 	<string name="question_exit">Are you sure you want to exit?</string>
 	<string name="location_disabled">Location is disabled. Please enable it!</string>
 	<string name="loc_coor">Lng: %1$3.6f; Lat: %2$3.6f</string>
@@ -37,5 +38,13 @@
 	<string name="add_shortcut">Create shortcut</string>
 
 	<string name="gcm_defaultSenderId">517920729052</string>
+
+	<string-array name="donation_google_catalog_values">
+        <item>NFC (Small)</item>
+        <item>NFC (Big)</item>
+    </string-array>
+
+    <string name="donation_paypal_item">Donation</string>
+	
 </resources>
 
