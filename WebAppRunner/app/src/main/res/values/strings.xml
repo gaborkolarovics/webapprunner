@@ -36,6 +36,8 @@
 	<string name="settings_after_restart">Applied need restart.</string>
 	<string name="get_url_data">Get shortcut data</string>
 	<string name="add_shortcut">Create shortcut</string>
+	<string name="sign_orientation">Sign screen is Portrai</string>
+	<string name="sign_orienatation_summary">Signature screen is deafult landscape orientation</string>
 
 	<string name="gcm_defaultSenderId">517920729052</string>
 
@@ -45,6 +47,6 @@
     </string-array>
 
     <string name="donation_paypal_item">Donation</string>
-	
+
 </resources>
 
