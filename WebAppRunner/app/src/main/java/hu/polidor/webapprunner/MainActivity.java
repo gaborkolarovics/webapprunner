@@ -39,9 +39,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
+import static hu.polidor.webapprunner.Const.TAG;
+
 public class MainActivity extends Activity
 {
-    public static final String TAG = "_WEBAPP_";
+	
     public static final int SIGNATURE_ACTIVITY = 1;
     public static final int LOCATION_ACTIVITY = 2;
 	public static final int NFCREADER_ACTIVITY = 3;
