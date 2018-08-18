@@ -16,6 +16,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import static hu.polidor.webapprunner.Const.TAG;
+
 public class ServiceRegistrationIntent extends IntentService
 {
 
@@ -27,14 +29,14 @@ public class ServiceRegistrationIntent extends IntentService
         }
 		catch (PackageManager.NameNotFoundException e)
 		{
-            Log.e(MainActivity.TAG, "Package manager not found!", e);
+            Log.e(TAG, "Package manager not found!", e);
 			return "";
         }
 	}
 
     public ServiceRegistrationIntent()
 	{
-		super(MainActivity.TAG);
+		super(TAG);
     }
 
     @Override

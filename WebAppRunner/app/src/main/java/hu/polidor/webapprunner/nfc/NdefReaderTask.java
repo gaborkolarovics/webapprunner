@@ -17,6 +17,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import static hu.polidor.webapprunner.Const.TAG;
+
 public class NdefReaderTask extends AsyncTask<Tag, Void, NfcResponse>
 {
 	private AsyncTaskListener<NfcResponse> listener;
@@ -34,7 +36,7 @@ public class NdefReaderTask extends AsyncTask<Tag, Void, NfcResponse>
 		Ndef ndef = Ndef.get(tag);
         if (ndef == null)
 		{
-			Log.e(MainActivity.TAG, resValues.get(R.string.ndef_not_support_tag));
+			Log.e(TAG, resValues.get(R.string.ndef_not_support_tag));
 			TagRecord tagRecord = new TagRecord();
 			tagRecord.setData(resValues.get(R.string.ndef_not_support_tag));
 			NfcResponse response = new NfcResponse();
@@ -64,7 +66,7 @@ public class NdefReaderTask extends AsyncTask<Tag, Void, NfcResponse>
 			}
 			catch (UnsupportedEncodingException e)
 			{
-				Log.e(MainActivity.TAG, resValues.get(R.string.unsupported_encoding), e);
+				Log.e(TAG, resValues.get(R.string.unsupported_encoding), e);
 				tagRecord.setData(resValues.get(R.string.unsupported_encoding));
 			}
 			tagRecords.add(tagRecord);
