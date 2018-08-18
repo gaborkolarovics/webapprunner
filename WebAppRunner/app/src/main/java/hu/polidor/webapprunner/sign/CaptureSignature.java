@@ -1,4 +1,4 @@
-package hu.polidor.webapprunner;
+package hu.polidor.webapprunner.sign;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,6 +20,10 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
+
+import hu.polidor.webapprunner.Const;
+import hu.polidor.webapprunner.MainActivity;
+import hu.polidor.webapprunner.R;
 
 import java.io.ByteArrayOutputStream;
 

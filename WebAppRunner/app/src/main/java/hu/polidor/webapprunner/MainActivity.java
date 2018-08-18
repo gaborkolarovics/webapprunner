@@ -1,5 +1,6 @@
 package hu.polidor.webapprunner;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -43,9 +44,11 @@ public class MainActivity extends Activity
     public static final String TAG = "_WEBAPP_";
     public static final int SIGNATURE_ACTIVITY = 1;
     public static final int LOCATION_ACTIVITY = 2;
+	public static final int NFCREADER_ACTIVITY = 3;
     public static final String INTENT_STATUS = "status";
     public static final String INTENT_STATUS_DONE = "done";
     public static final String INTENT_STATUS_CANCEL = "cancel";
+	public static final String INTENT_VALUE = "extraValue";
     public static final String SIGNATURE_STATUS = "status";
     public static final String SIGNATURE_STATUS_DONE = "done";
     public static final String SIGNATURE_STATUS_CANCEL = "cancel";
@@ -141,9 +144,9 @@ public class MainActivity extends Activity
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.main);
 
-		SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
-        webView = (WebView) findViewById(R.id.webview);
-        pbStatus = (ProgressBar) findViewById(R.id.pbProgress);
+		SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        webView = findViewById(R.id.webview);
+        pbStatus = findViewById(R.id.pbProgress);
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 		if (sharedPref.getBoolean(WEBAPP_CONFIG_FULLSCREEN, false))
@@ -200,6 +203,7 @@ public class MainActivity extends Activity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
+		//TODO: itt lehetne egy osszevont intent integrator ami loadurl listtel jon vissza
         switch (requestCode)
 		{
             case SIGNATURE_ACTIVITY:
@@ -229,6 +233,19 @@ public class MainActivity extends Activity
                     }
                 }
                 break;
+			case NFCREADER_ACTIVITY:
+				if (resultCode == RESULT_OK)
+				{
+					Bundle bundle = data.getExtras();
+                    String status = bundle.getString(INTENT_STATUS);
+                    if (status.equalsIgnoreCase(INTENT_STATUS_DONE))
+					{
+                        String locdata = bundle.getString(INTENT_VALUE);
+                        String replaced = locdata.replaceAll("\"", "\\\\\"");
+                        webView.loadUrl("javascript:setNfcData(\"" + replaced + "\")");
+                    }
+				}
+				break;
         }
 
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
