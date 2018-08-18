@@ -10,6 +10,10 @@
 			android:key="fullscreen"
 			android:title="@string/fullscreen_mode"
 			android:summary="@string/settings_after_restart"/>
+		<SwitchPreference
+			android:key="signorientation"
+			android:title="@string/sign_orientation"
+			android:summary="@string/sign_orienatation_summary" />
     </PreferenceCategory>
 </PreferenceScreen>
 
