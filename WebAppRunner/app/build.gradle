@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 22
     buildToolsVersion "21.1.0"
 
     defaultConfig {
         applicationId "hu.polidor.webapprunner"
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 12
-        versionName "1.7.1.b12"
+        versionCode 13
+        versionName "1.8.0.b13"
     }
     buildTypes {
         release {
