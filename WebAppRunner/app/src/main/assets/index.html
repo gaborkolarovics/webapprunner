@@ -59,9 +59,6 @@
 			<li class="page-scroll">
 			  <a href="#about">About</a>
 			</li>
-			<li class="page-scroll">
-			  <a href="#contact">Contact</a>
-			</li>
 		  </ul>
 		</div>
 		<!-- /.navbar-collapse -->
@@ -94,6 +91,7 @@
 		  </div>
 		</div>
 		<div class="row">
+		  
 		  <div class="col-sm-4 portfolio-item">
 			<a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
 			  <div class="caption">
@@ -104,6 +102,7 @@
 			  <img src="img/portfolio/vibrate.png" class="img-responsive" alt="">
 			</a>
 		  </div>
+		  
 		  <div class="col-sm-4 portfolio-item">
 			<a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
 			  <div class="caption">
@@ -114,6 +113,7 @@
 			  <img src="img/portfolio/location.png" class="img-responsive" alt="">
 			</a>
 		  </div>
+		  
 		  <div class="col-sm-4 portfolio-item">
 			<a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
 			  <div class="caption">
@@ -124,8 +124,20 @@
 			  <img src="img/portfolio/barcode.png" class="img-responsive" alt="">
 			</a>
 		  </div>
+		  
 		  <div class="col-sm-4 portfolio-item">
 			<a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
+			  <div class="caption">
+				<div class="caption-content">
+				  <i class="fa fa-search-plus fa-3x"></i>
+				</div>
+			  </div>
+			  <img src="img/portfolio/nfc.png" class="img-responsive" alt="">
+			</a>
+		  </div>
+		  
+		  <div class="col-sm-4 portfolio-item">
+			<a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
 			  <div class="caption">
 				<div class="caption-content">
 				  <i class="fa fa-search-plus fa-3x"></i>
@@ -134,6 +146,7 @@
 			  <img src="img/portfolio/sign.png" class="img-responsive" alt="">
 			</a>
 		  </div>
+		  
 		</div>
 	  </div>
 	</section>
@@ -161,7 +174,7 @@
 		<div class="container">
 		  <div class="row">
 			<div class="col-lg-12">
-			  Copyright &copy; Polidor Kkt. 2016
+			  Copyright &copy; Polidor Kkt. 2016-2018
 			</div>
 		  </div>
 		</div>
@@ -175,6 +188,7 @@
 	</div>
 
 	<!-- Portfolio Modals -->
+	<!-- MODAL 1 VIBRATE -->
 	<div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
 	  <div class="modal-content">
 		<div class="close-modal" data-dismiss="modal">
@@ -238,6 +252,8 @@ function VibrateShort(type) {
 		</div>
 	  </div>
 	</div>
+	
+	<!-- MODAL 2 LOCATION -->
 	<div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
 	  <div class="modal-content">
 		<div class="close-modal" data-dismiss="modal">
@@ -283,12 +299,26 @@ function setLocation(data) {
 				<button type="button" class="btn btn-default" onclick="SmplLocation()">Simple location</button>
 				<button type="button" class="btn btn-default" onclick="SpecLocation()">Special location</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+				<code>
+				  if (typeof WebAppRunner !== 'undefined') {<br />
+				  WebAppRunner.getLocation(); // simple location<br />
+				  WebAppRunner.getFineLocation(5, 60); // params: distance (m), timeout (s)<br />
+				  } else {<br />
+				  alert("WebAppRunner not defined :(");<br />
+				  }<br />
+				  <br />
+				  function setLocation(data) {<br />
+                    alert(data); // reponse json<br />
+                  }<br />
+				</code>
 			  </div>
 			</div>
 		  </div>
 		</div>
 	  </div>
 	</div>
+	
+	<!-- MODAL 3 BARCODE -->
 	<div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
 	  <div class="modal-content">
 		<div class="close-modal" data-dismiss="modal">
@@ -328,7 +358,59 @@ function setBarcode(data) {
 		</div>
 	  </div>
 	</div>
+	
+	<!-- MODAL 4 NFC -->
 	<div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
+	  <div class="modal-content">
+		<div class="close-modal" data-dismiss="modal">
+		  <div class="lr">
+			<div class="rl">
+			</div>
+		  </div>
+		</div>
+		<div class="container">
+		  <div class="row">
+			<div class="col-lg-8 col-lg-offset-2">
+			  <div class="modal-body">
+				<h2>NFC</h2>
+				<hr class="star-primary">
+				<p>Read nfc tag</p>
+				<p>Data: </p><p id="nfcdata"></p>
+<script type='text/javascript'>
+function GetNfc() {
+  if (typeof WebAppRunner !== 'undefined') {
+    WebAppRunner.scanNfc();
+  } else {
+    alert("WebAppRunner not defined :(");
+  }
+}
+function setNfcData(data) {
+  document.getElementById("nfcdata").innerHTML = data;
+}
+</script>
+				<button type="button" class="btn btn-default" onClick="GetNfc()">Scan NFC tag</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+				<br />
+				<code>
+				  if (typeof WebAppRunner !== 'undefined') {<br />
+				  WebAppRunner.scanNfc();<br />
+				  } else {<br />
+				  alert("WebAppRunner not defined :(");<br />
+				  }<br />
+				  <br />
+				  function setNfcData(data) {<br />
+                    alert(data); // reponse json<br />
+                  }<br />
+				</code>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	
+	<!-- MODAL 5 SIGNATURE -->
+	<div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
 	  <div class="modal-content">
 		<div class="close-modal" data-dismiss="modal">
 		  <div class="lr">
@@ -364,7 +446,7 @@ function setSignatureImage(imgimage) {
 </script>
 				<button type="button" class="btn btn-default" onclick="GetImage()">Sign</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-				<p>Image data to image : </p><p id="imgimage"></p>
+				<p>Image data to image : </p><p id="imgimage" class="img-responsive"></p>
 				<p>Image data to Base64 code : </p><p id="imgdata"></p>
 			  </div>
 			</div>

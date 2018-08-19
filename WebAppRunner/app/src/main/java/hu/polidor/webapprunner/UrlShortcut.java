@@ -2,7 +2,10 @@ package hu.polidor.webapprunner;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -13,6 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+
+import java.util.Arrays;
 
 public class UrlShortcut extends Activity
 {
@@ -26,20 +31,44 @@ public class UrlShortcut extends Activity
 		shortcutIntent.setAction(Intent.ACTION_MAIN);
 		shortcutIntent.putExtra(MainActivity.WEBAPP_INTENT_URL, etURL);
 
-		Intent addIntent = new Intent();
-		addIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
-		addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, etName);
-		if (faviconBitmap != null)
+		Bitmap scaledBitmap = Bitmap.createScaledBitmap(faviconBitmap, 64, 64, true);
+		
+		ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
+		if (shortcutManager.isRequestPinShortcutSupported())
 		{
-			Bitmap scaledBitmap = Bitmap.createScaledBitmap(faviconBitmap, 64, 64, true);
-			addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON, scaledBitmap);	
+			Icon icon = null;
+			if (faviconBitmap != null)
+			{
+				icon = Icon.createWithBitmap(scaledBitmap);
+			}
+			else
+			{
+				icon = Icon.createWithResource(getApplicationContext(), R.drawable.ic_launcher);
+			}
+			ShortcutInfo shortcut = new ShortcutInfo.Builder(this, "id1")
+				.setShortLabel(etName)
+				.setIcon(icon)
+				.setIntent(shortcutIntent)
+				.build();
+			shortcutManager.requestPinShortcut(shortcut, null);
 		}
 		else
 		{
-			addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, Intent.ShortcutIconResource.fromContext(getApplicationContext(), R.drawable.ic_launcher));
+			// old format..
+			Intent addIntent = new Intent();
+			addIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
+			addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, etName);
+			if (faviconBitmap != null)
+			{
+				addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON, scaledBitmap);	
+			}
+			else
+			{
+				addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, Intent.ShortcutIconResource.fromContext(getApplicationContext(), R.drawable.ic_launcher));
+			}
+			addIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+			getApplicationContext().sendBroadcast(addIntent);
 		}
-		addIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
-		getApplicationContext().sendBroadcast(addIntent);
 	}
 
 	@Override
@@ -50,19 +79,19 @@ public class UrlShortcut extends Activity
 		WebIconDatabase.getInstance().open(getDir("icons", MODE_PRIVATE).getPath());
 		setContentView(R.layout.urlshortcut);
 
-		final Button btnGetData = (Button) findViewById(R.id.btnGetData);
+		final Button btnGetData = findViewById(R.id.btnGetData);
 		btnGetData.setOnClickListener(new View.OnClickListener(){
 
 				@Override
 				public void onClick(View p1)
 				{
 					btnGetData.setEnabled(false);
-					EditText etURL = (EditText) findViewById(R.id.etUrl);
+					EditText etURL = findViewById(R.id.etUrl);
 					getPageData(etURL.getText().toString());
 				}
 			});
 
-		Button btnAddIcon = (Button) findViewById(R.id.btnAddIcon);
+		Button btnAddIcon = findViewById(R.id.btnAddIcon);
 		btnAddIcon.setEnabled(false);
 		btnAddIcon.setOnClickListener(new View.OnClickListener(){
 
@@ -85,17 +114,17 @@ public class UrlShortcut extends Activity
 				{
 					mUrl = view.getUrl();
 					mTitle = view.getTitle();
-					EditText etName = (EditText) findViewById(R.id.etName);
+					EditText etName = findViewById(R.id.etName);
 					etName.setText(mTitle);
-					EditText etURL = (EditText) findViewById(R.id.etUrl);
+					EditText etURL = findViewById(R.id.etUrl);
 					etURL.setText(mUrl);
-					ProgressBar pbStatus = (ProgressBar) findViewById(R.id.pbStatus);
+					ProgressBar pbStatus = findViewById(R.id.pbStatus);
 					pbStatus.setVisibility(ProgressBar.INVISIBLE);
-					Button btnGetData = (Button) findViewById(R.id.btnGetData);
+					Button btnGetData = findViewById(R.id.btnGetData);
 					btnGetData.setEnabled(true);
 					if (!mTitle.isEmpty() && !mUrl.isEmpty())
 					{
-						Button btnAddIcon = (Button) findViewById(R.id.btnAddIcon);
+						Button btnAddIcon = findViewById(R.id.btnAddIcon);
 						btnAddIcon.setEnabled(true);
 					}
 				}
@@ -104,7 +133,7 @@ public class UrlShortcut extends Activity
 				@Override
 				public void onProgressChanged(WebView view, int newProgress)
 				{
-					ProgressBar pbStatus = (ProgressBar) findViewById(R.id.pbStatus);
+					ProgressBar pbStatus = findViewById(R.id.pbStatus);
 					pbStatus.setProgress(newProgress);
 					super.onProgressChanged(view, newProgress);
 				}
@@ -114,12 +143,12 @@ public class UrlShortcut extends Activity
 				{
 					super.onReceivedIcon(view, icon);
 					mIcon = icon;
-					ImageView ivFavicon = (ImageView) findViewById(R.id.ivFavicon);
+					ImageView ivFavicon = findViewById(R.id.ivFavicon);
 					ivFavicon.setImageBitmap(mIcon);
 				}
 			});
 
-		ProgressBar pbStatus = (ProgressBar) findViewById(R.id.pbStatus);
+		ProgressBar pbStatus = findViewById(R.id.pbStatus);
 		pbStatus.setVisibility(ProgressBar.VISIBLE);
 		if (!url.contains("://"))
 		{

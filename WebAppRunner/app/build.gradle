@@ -7,9 +7,9 @@ android {
     defaultConfig {
         applicationId "hu.polidor.webapprunner"
         minSdkVersion 14
-        targetSdkVersion 16
-        versionCode 12
-        versionName "1.7.1.b12"
+        targetSdkVersion 26
+        versionCode 13
+        versionName "1.8.0.b13"
     }
     buildTypes {
         release {
@@ -22,6 +22,7 @@ android {
 dependencies {
 	compile 'com.android.support:support-v4:23.4.0'
 	compile 'com.google.android.gms:play-services-gcm:8.4.0'
+	compile 'com.google.code.gson:gson:2.8.2'
 	compile 'org.sufficientlysecure:donations:2.5'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }

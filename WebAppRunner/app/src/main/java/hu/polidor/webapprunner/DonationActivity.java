@@ -17,7 +17,7 @@ public class DonationActivity  extends FragmentActivity
      * Google
      */
     private static final String GOOGLE_PUBKEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkdaa6zlFB9y/sx7ptSdiUl981dSi8gB0R552t9ZYAx8ONORYaZwvFscHwiDEauGLUWHQF45vriARdN5irgE/X7+/9+XTUSX1vIDPI770dz1NtT54qlqjPJMj1HFfJrcyhSU+eVbZcPw1TVdZPRoN1n5eM3zYGzOCDsDenq/SgbHQRmQKVsLlPtYUH8N93nmbbNvsWGwmB0gaFqTzYsg62S7hUvfqM0HAcEbHPiC4C0nWmbO1izMZCcGeqOKOyJdZyZQ3k8WZmpPbXYqgm+hxJHC05KO8ffE7TrC6KtL0jQBm73WfBI3R8orieJN8M9dft9PPkf8DPEHIeF7TPp41IQIDAQAB";
-    private static final String[] GOOGLE_CATALOG = new String[]{"nfc.donation.5", "nfc.donation.10"};
+    private static final String[] GOOGLE_CATALOG = new String[]{"donate.coffee", "donate.beer", "donate.dinner", "donate.develop"};
 
     /**
      * PayPal

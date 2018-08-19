@@ -38,11 +38,17 @@
 	<string name="add_shortcut">Ikon létrehozása</string>
 	<string name="sign_orientation">Aláírás álló képernyőn</string>
 	<string name="sign_orienatation_summary">Az aláírás képernyő alapértelmezetten fektetett.</string>
-
+	<string name="nfc_not_supported">Az NFC nem támogatott!</string>
+	<string name="nfc_disabled">Az NFC ki van kapcsolva!</string>
+	<string name="nfc_waiting">Várakozás az NFC tag olvasására..</string>
+	<string name="ndef_not_support_tag">NDEF nem támogatja ezt a tag-et.</string>
+	<string name="unsupported_encoding">Nem támogatott karaker kódolás!</string>
 
 	<string-array name="donation_google_catalog_values">
-        <item>NFC (Kicsi)</item>
-        <item>NFC (Nagy)</item>
+        <item>Kávé</item>
+        <item>Sör</item>
+		<item>Vacsora</item>
+		<item>Új funkció</item>
     </string-array>
 
 </resources>

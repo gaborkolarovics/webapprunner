@@ -5,10 +5,13 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WebAppSettings extends PreferenceActivity {
 
+	private static List<String> fragments = new ArrayList<String>();
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,7 +20,17 @@ public class WebAppSettings extends PreferenceActivity {
     @Override
     public void onBuildHeaders(List<PreferenceActivity.Header> target) {
         loadHeadersFromResource(R.xml.header, target);
+		fragments.clear();
+        for (Header header : target) {
+            fragments.add(header.fragment);
+        }
     }
+
+	@Override
+	protected boolean isValidFragment(String fragmentName)
+	{
+		return fragments.contains(fragmentName);
+	}
 
     public static class LicencInfo extends PreferenceFragment {
 
