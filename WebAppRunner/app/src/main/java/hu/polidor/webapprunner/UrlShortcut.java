@@ -6,6 +6,7 @@ import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Icon;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -32,29 +33,9 @@ public class UrlShortcut extends Activity
 		shortcutIntent.putExtra(MainActivity.WEBAPP_INTENT_URL, etURL);
 
 		Bitmap scaledBitmap = Bitmap.createScaledBitmap(faviconBitmap, 64, 64, true);
-		
-		ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
-		if (shortcutManager.isRequestPinShortcutSupported())
+
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
 		{
-			Icon icon = null;
-			if (faviconBitmap != null)
-			{
-				icon = Icon.createWithBitmap(scaledBitmap);
-			}
-			else
-			{
-				icon = Icon.createWithResource(getApplicationContext(), R.drawable.ic_launcher);
-			}
-			ShortcutInfo shortcut = new ShortcutInfo.Builder(this, "id1")
-				.setShortLabel(etName)
-				.setIcon(icon)
-				.setIntent(shortcutIntent)
-				.build();
-			shortcutManager.requestPinShortcut(shortcut, null);
-		}
-		else
-		{
-			// old format..
 			Intent addIntent = new Intent();
 			addIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
 			addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, etName);
@@ -68,6 +49,32 @@ public class UrlShortcut extends Activity
 			}
 			addIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
 			getApplicationContext().sendBroadcast(addIntent);
+		}
+		else
+		{
+			ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
+			if (shortcutManager.isRequestPinShortcutSupported())
+			{
+				Icon icon = null;
+				if (faviconBitmap != null)
+				{
+					icon = Icon.createWithBitmap(scaledBitmap);
+				}
+				else
+				{
+					icon = Icon.createWithResource(getApplicationContext(), R.drawable.ic_launcher);
+				}
+				ShortcutInfo shortcut = new ShortcutInfo.Builder(this, "id1")
+					.setShortLabel(etName)
+					.setIcon(icon)
+					.setIntent(shortcutIntent)
+					.build();
+				shortcutManager.requestPinShortcut(shortcut, null);
+			} 
+			else
+			{
+				MainActivity.makeMsg("Pin shortcut request not supported!");
+			}
 		}
 	}
 
