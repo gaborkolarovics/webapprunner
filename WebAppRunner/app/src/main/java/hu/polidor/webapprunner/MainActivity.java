@@ -35,6 +35,8 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import hu.polidor.webapprunner.shortcut.UrlShortcutActivity;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -358,7 +360,7 @@ public class MainActivity extends Activity
 					{
 						alert.dismiss();
 						Intent i = new Intent();
-						i.setClass(mContext, UrlShortcut.class);
+						i.setClass(mContext, UrlShortcutActivity.class);
 						startActivity(i);
                     }
                 });

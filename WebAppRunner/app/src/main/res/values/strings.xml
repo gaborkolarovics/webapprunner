@@ -44,6 +44,7 @@
 	<string name="nfc_waiting">Waiting NFC tag scanning..</string>
 	<string name="ndef_not_support_tag">NDEF is not supported by this Tag.</string>
 	<string name="unsupported_encoding">Unsupported encoding.</string>
+	<string name="shortcut_not_supported">Pin shortcut request not supported!</string>
 	
 	<string name="gcm_defaultSenderId">517920729052</string>
 
