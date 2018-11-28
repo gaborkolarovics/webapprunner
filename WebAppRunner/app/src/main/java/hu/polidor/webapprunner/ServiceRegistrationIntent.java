@@ -8,6 +8,8 @@ import android.util.Log;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
 
+import hu.polidor.webapprunner.common.PreferenceHelper;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -62,7 +64,7 @@ public class ServiceRegistrationIntent extends IntentService
             URL url = new URL(MainActivity.WEBAPP_SERVER_URL + "/api.php");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             String urlParameters = "action=register" + 
-				"&" + MainActivity.WEBAPP_CONFIG_DEVICEID + "=" + MainActivity.getUUID() + 
+				"&" + MainActivity.WEBAPP_CONFIG_DEVICEID + "=" + PreferenceHelper.getDeviceId(this) + 
 				"&tokenid=" + token +
 				"&" + MainActivity.WEBAPP_CONFIG_LICENSEPRGVER + "=" + getAppVersion() +
 				"&" + MainActivity.WEBAPP_CONFIG_LICENSETYPE + "=playstore";
