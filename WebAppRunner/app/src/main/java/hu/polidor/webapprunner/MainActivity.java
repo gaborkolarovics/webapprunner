@@ -1,6 +1,5 @@
 package hu.polidor.webapprunner;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -8,12 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -30,22 +24,21 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import hu.polidor.webapprunner.common.PreferenceHelper;
+import hu.polidor.webapprunner.common.Utils;
+import hu.polidor.webapprunner.rate.AppRate;
 import hu.polidor.webapprunner.shortcut.UrlShortcutActivity;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.UUID;
 
 import static hu.polidor.webapprunner.Const.TAG;
 
 public class MainActivity extends Activity
 {
-	
+
     public static final int SIGNATURE_ACTIVITY = 1;
     public static final int LOCATION_ACTIVITY = 2;
 	public static final int NFCREADER_ACTIVITY = 3;
@@ -61,25 +54,18 @@ public class MainActivity extends Activity
     public static final String FINELOCATION_MINDIST = "mindistance";
     public static final String FINELOCATION_MINTIME = "mintimeout";
 
-    public static final String WEBAPP_DEFAULT_URL = "file:///android_asset/index.html";
 	public static final String WEBAPP_SERVER_URL = "http://polidor-kkt.hu";
-    public static final String WEBAPP_CONFIG_URL = "webappurl";
     public static final String WEBAPP_CONFIG_DEVICEID = "deviceid";
     public static final String WEBAPP_CONFIG_LICENSETYPE = "licensetype";
     public static final String WEBAPP_CONFIG_LICENSEDATE = "licensedate";
     public static final String WEBAPP_CONFIG_LICENSECHK = "licenselastchk";
 	public static final String WEBAPP_CONFIG_LICENSEPRGVER = "programversion";
-    public static final String WEBAPP_CONFIG_LICENSEVER = "licenseversion";
-	public static final String WEBAPP_CONFIG_FULLSCREEN = "fullscreen";
 
     public static final String WEBAPP_INTENT_URL = "intenturl";
-
-    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     public static final String REGISTRATION_COMPLETE = "registrationComplete";
 
     public ProgressBar pbStatus;
     public WebView webView;
-    public SharedPreferences sharedPref;
     public SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     public WebAppWebViewClient webappWebViewClient = null;
     public String deviceId;
@@ -93,42 +79,6 @@ public class MainActivity extends Activity
 	{
         Toast.makeText(mContext, msg, Toast.LENGTH_LONG).show();
 		Log.d(TAG, msg);
-    }
-
-    public static String getUUID()
-	{
-        String m_szDevIDShort = "35" + (Build.BOARD.length() % 10) + (Build.BRAND.length() % 10) + (Build.CPU_ABI.length() % 10) + (Build.DEVICE.length() % 10) + (Build.MANUFACTURER.length() % 10) + (Build.MODEL.length() % 10) + (Build.PRODUCT.length() % 10);
-        String serial;
-        try
-		{
-            serial = Build.class.getField("SERIAL").get(null).toString();
-            return new UUID(m_szDevIDShort.hashCode(), serial.hashCode()).toString();
-        }
-		catch (Exception exception)
-		{
-            serial = "serial";
-        }
-        return new UUID(m_szDevIDShort.hashCode(), serial.hashCode()).toString();
-    }
-
-    private boolean checkPlayServices()
-	{
-        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
-        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
-        if (resultCode != ConnectionResult.SUCCESS)
-		{
-            if (apiAvailability.isUserResolvableError(resultCode))
-			{
-                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST).show();
-            }
-			else
-			{
-                // Log.i(TAG, "This device is not supported.");
-                finish();
-            }
-            return false;
-        }
-        return true;
     }
 
     private void registerReceiver()
@@ -152,21 +102,15 @@ public class MainActivity extends Activity
         webView = findViewById(R.id.webview);
         pbStatus = findViewById(R.id.pbProgress);
 
-        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-		if (sharedPref.getBoolean(WEBAPP_CONFIG_FULLSCREEN, false))
+		if (PreferenceHelper.isFullScreenApp(this))
 		{
 			getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);	
 		}
-		deviceId = sharedPref.getString(WEBAPP_CONFIG_DEVICEID, "");
-        if (deviceId.isEmpty())
-		{
-            deviceId = getUUID();
-            sharedPref.edit().putString(WEBAPP_CONFIG_DEVICEID, deviceId).apply();
-        }
+		deviceId = PreferenceHelper.getDeviceId(this);
         appurl = getURL(getIntent(), false);
         registerReceiver();
 
-        if (checkPlayServices())
+        if (Utils.checkPlayServices(this))
 		{
             Intent intent = new Intent(this, ServiceRegistrationIntent.class);
             startService(intent);
@@ -202,6 +146,8 @@ public class MainActivity extends Activity
 				}
 			});
 
+		AppRate.getInstance().monitor(this);
+		AppRate.ShowRateDialogIfConditionsApply(this);
     }
 
     @Override
@@ -317,10 +263,10 @@ public class MainActivity extends Activity
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			LayoutInflater inflater = getLayoutInflater();
 			View exitView = inflater.inflate(R.layout.exit, null);
-			Button btnRefresh = (Button) exitView.findViewById(R.id.btnRefresh);
-			Button btnSettings = (Button) exitView.findViewById(R.id.btnSettings);
-			Button btnShortcut = (Button) exitView.findViewById(R.id.btnShortcut);
-			Button btnDonation = (Button) exitView.findViewById(R.id.btnDonation);
+			Button btnRefresh = exitView.findViewById(R.id.btnRefresh);
+			Button btnSettings = exitView.findViewById(R.id.btnSettings);
+			Button btnShortcut = exitView.findViewById(R.id.btnShortcut);
+			Button btnDonation = exitView.findViewById(R.id.btnDonation);
             builder.setView(exitView);
 			builder.setMessage(R.string.question_exit)
 				.setCancelable(false)
@@ -393,11 +339,7 @@ public class MainActivity extends Activity
 		}
 		if (!onlyIntent && respURL.isEmpty())
 		{
-			respURL = sharedPref.getString(WEBAPP_CONFIG_URL, "");
-		}
-		if (!onlyIntent && respURL.isEmpty())
-		{
-            respURL = WEBAPP_DEFAULT_URL;
+			respURL = PreferenceHelper.getUrl(this);
 		}
 		return respURL;
 	}

@@ -14,12 +14,12 @@ import android.webkit.JavascriptInterface;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 
+import hu.polidor.webapprunner.common.PreferenceHelper;
 import hu.polidor.webapprunner.nfc.NfcReaderActivity;
 import hu.polidor.webapprunner.sign.CaptureSignature;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import com.google.zxing.integration.android.*;
 
 public class WebAppJsProxy
 {
@@ -40,7 +40,7 @@ public class WebAppJsProxy
 	@JavascriptInterface
     public String getDeviceID()
 	{
-        return MainActivity.getUUID();
+        return PreferenceHelper.getDeviceId(activity);
     }
 
 	@JavascriptInterface
@@ -65,15 +65,13 @@ public class WebAppJsProxy
 	@JavascriptInterface
     public String getURL()
 	{
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
-		return sharedPref.getString(MainActivity.WEBAPP_CONFIG_URL, "");
+		return PreferenceHelper.getUrl(activity);
 	}
 
 	@JavascriptInterface
     public void setURL(String url)
 	{
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
-		sharedPref.edit().putString(MainActivity.WEBAPP_CONFIG_URL, url).apply();
+		PreferenceHelper.setUrl(activity, url);
 	}
 
 	@JavascriptInterface
