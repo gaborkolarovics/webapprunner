@@ -20,7 +20,7 @@ import com.google.gson.Gson;
 
 import hu.polidor.webapprunner.MainActivity;
 import hu.polidor.webapprunner.R;
-import hu.polidor.webapprunner.listener.AsyncTaskListener;
+import hu.polidor.webapprunner.common.AsyncTaskListener;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;

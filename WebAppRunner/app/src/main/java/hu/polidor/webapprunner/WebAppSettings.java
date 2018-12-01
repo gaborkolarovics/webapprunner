@@ -5,12 +5,14 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 
+import hu.polidor.webapprunner.common.PreferenceHelper;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class WebAppSettings extends PreferenceActivity {
 
-	private static List<String> fragments = new ArrayList<String>();
+	private static List<String> fragments = new ArrayList<>();
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +40,9 @@ public class WebAppSettings extends PreferenceActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.licenseinfo);
-
-            String deviceId = getPreferenceManager().getSharedPreferences().getString(MainActivity.WEBAPP_CONFIG_DEVICEID, "ID not set!");
+			
             Preference prefDeviceId = findPreference(MainActivity.WEBAPP_CONFIG_DEVICEID);
-            prefDeviceId.setSummary(deviceId);
+            prefDeviceId.setSummary(PreferenceHelper.getDeviceId(getContext()));
             prefDeviceId.setEnabled(false);
         }
 
@@ -54,10 +55,9 @@ public class WebAppSettings extends PreferenceActivity {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.appsettings);
 			
-			String appURL = getPreferenceManager().getSharedPreferences().getString(MainActivity.WEBAPP_CONFIG_URL, "");
-            Preference prefAppURL = findPreference(MainActivity.WEBAPP_CONFIG_URL);
-            prefAppURL.setSummary(appURL);
+            Preference prefAppURL = findPreference("webappurl");
+            prefAppURL.setSummary(PreferenceHelper.getUrl(getContext()));
         }
-
+		
     }
 }

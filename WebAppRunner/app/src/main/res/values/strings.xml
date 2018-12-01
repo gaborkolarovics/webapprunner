@@ -44,7 +44,8 @@
 	<string name="nfc_waiting">Waiting NFC tag scanning..</string>
 	<string name="ndef_not_support_tag">NDEF is not supported by this Tag.</string>
 	<string name="unsupported_encoding">Unsupported encoding.</string>
-	
+	<string name="shortcut_not_supported">Pin shortcut request not supported!</string>
+
 	<string name="gcm_defaultSenderId">517920729052</string>
 
 	<string-array name="donation_google_catalog_values">
@@ -55,6 +56,13 @@
     </string-array>
 
     <string name="donation_paypal_item">Donation</string>
+
+	<!-- Rate -->
+	<string name="rate_dialog_title">Rate this app</string>
+	<string name="rate_dialog_message">If you enjoy playing this app, would you mind taking a moment to rate it? It won\'t take more than a minute. Thanks for your support!</string>
+    <string name="rate_dialog_ok">Rate It Now</string>
+    <string name="rate_dialog_cancel">Remind Me Later</string>
+    <string name="rate_dialog_no">No, Thanks</string>
 
 </resources>
 

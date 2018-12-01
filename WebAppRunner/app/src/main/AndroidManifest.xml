@@ -50,7 +50,7 @@
             android:theme="@android:style/Theme.Dialog" />
 
 		<activity
-            android:name=".UrlShortcut"
+            android:name=".shortcut.UrlShortcutActivity"
             android:label="@string/title_shortcut" />
 		
 		<activity
