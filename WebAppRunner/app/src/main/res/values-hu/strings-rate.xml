@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string name="rate_dialog_title">Értékelés</string>
+	<string name="rate_dialog_message">Ha tetszik az alkalmazás, kérlek szánj egy percet arra, hogy értékeled. Köszönöm a támogatást!</string>
+    <string name="rate_dialog_ok">Igen, értékelem</string>
+    <string name="rate_dialog_cancel">Emlékeztess később</string>
+    <string name="rate_dialog_no">Nem, köszönöm</string>
+	<string name="rate_install_date">Telepítés napja</string>
+	<string name="rate_dialog_approved">Értékelő dialogus elfogadva</string>
+	<string name="rate_apprun_count">Alkalmazás inditások száma</string>
+
+</resources>

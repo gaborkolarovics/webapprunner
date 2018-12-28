@@ -115,13 +115,9 @@ public class WebAppJsProxy
     public void getLocation()
 	{
 
-		if (ContextCompat.checkSelfPermission(activity,
-											  Manifest.permission.ACCESS_FINE_LOCATION)
-			!= PackageManager.PERMISSION_GRANTED)
+		if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
 		{
-			ActivityCompat.requestPermissions(activity,
-											  new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-											  1);
+			ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 		}
 		else
 		{
@@ -133,13 +129,9 @@ public class WebAppJsProxy
 	@JavascriptInterface
     public void getFineLocation(int minDistance, int minTimeout)
 	{
-		if (ContextCompat.checkSelfPermission(activity,
-											  Manifest.permission.ACCESS_FINE_LOCATION)
-			!= PackageManager.PERMISSION_GRANTED)
+		if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
 		{
-			ActivityCompat.requestPermissions(activity,
-											  new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-											  1);
+			ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 		}
 		else
 		{

@@ -8,10 +8,10 @@ package hu.polidor.webapprunner.common;
  */
 public interface AsyncTaskListener<T>
 {
-	
+
 	/**
 	 * Callback method
 	 */
 	void OnTaskCompleted(T object);
-	
+
 }

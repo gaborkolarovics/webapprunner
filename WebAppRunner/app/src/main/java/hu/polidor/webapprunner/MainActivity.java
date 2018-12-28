@@ -30,9 +30,8 @@ import com.google.zxing.integration.android.IntentResult;
 import hu.polidor.webapprunner.common.PreferenceHelper;
 import hu.polidor.webapprunner.common.Utils;
 import hu.polidor.webapprunner.rate.AppRate;
+import hu.polidor.webapprunner.settings.WebAppSettings;
 import hu.polidor.webapprunner.shortcut.UrlShortcutActivity;
-
-import java.text.SimpleDateFormat;
 
 import static hu.polidor.webapprunner.Const.TAG;
 
@@ -54,8 +53,6 @@ public class MainActivity extends Activity
     public static final String FINELOCATION_MINDIST = "mindistance";
     public static final String FINELOCATION_MINTIME = "mintimeout";
 
-	public static final String WEBAPP_SERVER_URL = "http://polidor-kkt.hu";
-    public static final String WEBAPP_CONFIG_DEVICEID = "deviceid";
     public static final String WEBAPP_CONFIG_LICENSETYPE = "licensetype";
     public static final String WEBAPP_CONFIG_LICENSEDATE = "licensedate";
     public static final String WEBAPP_CONFIG_LICENSECHK = "licenselastchk";
@@ -66,7 +63,6 @@ public class MainActivity extends Activity
 
     public ProgressBar pbStatus;
     public WebView webView;
-    public SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     public WebAppWebViewClient webappWebViewClient = null;
     public String deviceId;
     public static String appurl;
@@ -146,7 +142,6 @@ public class MainActivity extends Activity
 				}
 			});
 
-		AppRate.getInstance().monitor(this);
 		AppRate.ShowRateDialogIfConditionsApply(this);
     }
 
@@ -270,13 +265,13 @@ public class MainActivity extends Activity
             builder.setView(exitView);
 			builder.setMessage(R.string.question_exit)
 				.setCancelable(false)
-				.setPositiveButton(R.string.btn_yes, new DialogInterface.OnClickListener() {
+				.setPositiveButton(R.string.base_yes, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id)
 					{
 						finish();
 					}
 				})
-				.setNegativeButton(R.string.btn_no, new DialogInterface.OnClickListener() {
+				.setNegativeButton(R.string.base_no, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id)
 					{
 						dialog.cancel();
@@ -331,7 +326,7 @@ public class MainActivity extends Activity
 		String respURL = "";
 		if (i.getExtras() != null)
 		{
-			if (i.getStringExtra(WEBAPP_INTENT_URL) != null && !i.getStringExtra(WEBAPP_INTENT_URL).isEmpty()) 
+			if (i.getStringExtra(WEBAPP_INTENT_URL) != null && !i.getStringExtra(WEBAPP_INTENT_URL).isEmpty())
 			{
 				respURL = i.getStringExtra(WEBAPP_INTENT_URL);
 				i.removeExtra(WEBAPP_INTENT_URL);

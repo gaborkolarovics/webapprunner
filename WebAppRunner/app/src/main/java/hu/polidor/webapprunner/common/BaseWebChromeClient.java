@@ -14,7 +14,7 @@ import android.widget.ProgressBar;
  */
 public class BaseWebChromeClient extends WebChromeClient
 {
-	
+
 	/**
 	 * ProgressBar reference
 	 */
@@ -27,7 +27,7 @@ public class BaseWebChromeClient extends WebChromeClient
 	{
 		this.progressBar = progressBar;
 	}
-	
+
 	@Override
 	public void onProgressChanged(WebView view, int newProgress)
 	{

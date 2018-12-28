@@ -48,7 +48,7 @@ public final class AppRate
 		{
 			if (!PreferenceHelper.getRateDialogApproved(activity)
 				&& (Utils.isOverDate(PreferenceHelper.getLastRemindDate(activity), 1) || PreferenceHelper.getLastRemindDate(activity) == 0L)
-				&& Utils.isOverDate(PreferenceHelper.getInstallDate(activity), 1)
+				&& Utils.isOverDate(PreferenceHelper.getInstallDate(activity), 5)
 				&& PreferenceHelper.getLaunchCount(activity) > 10)
 			{
 				DialogManager.show(activity);

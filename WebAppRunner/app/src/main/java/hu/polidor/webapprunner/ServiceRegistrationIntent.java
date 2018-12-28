@@ -20,51 +20,41 @@ import java.net.URL;
 
 import static hu.polidor.webapprunner.Const.TAG;
 
-public class ServiceRegistrationIntent extends IntentService
-{
+public class ServiceRegistrationIntent extends IntentService {
 
-	public String getAppVersion()
-	{
-		try
-		{
+	private static final String WEBAPP_SERVER_URL = "http://polidor-kkt.hu";
+
+	public String getAppVersion() {
+		try {
 			return getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
-        }
-		catch (PackageManager.NameNotFoundException e)
-		{
+        } catch (PackageManager.NameNotFoundException e) {
             Log.e(TAG, "Package manager not found!", e);
 			return "";
         }
 	}
 
-    public ServiceRegistrationIntent()
-	{
+    public ServiceRegistrationIntent() {
 		super(TAG);
     }
 
     @Override
-    protected void onHandleIntent(Intent intent)
-	{
-        try
-		{
+    protected void onHandleIntent(Intent intent) {
+        try {
             InstanceID instanceID = InstanceID.getInstance(this);
             String token = instanceID.getToken(getString(R.string.gcm_defaultSenderId),
 											   GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
             sendRegistrationToServer(token); 
-        }
-		catch (Exception e)
-		{
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void sendRegistrationToServer(String token)
-	{
-        try
-		{
-            URL url = new URL(MainActivity.WEBAPP_SERVER_URL + "/api.php");
+    private void sendRegistrationToServer(String token) {
+        try {
+            URL url = new URL(WEBAPP_SERVER_URL + "/api.php");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             String urlParameters = "action=register" + 
-				"&" + MainActivity.WEBAPP_CONFIG_DEVICEID + "=" + PreferenceHelper.getDeviceId(this) + 
+				"&deviceid=" + PreferenceHelper.getDeviceId(this) + 
 				"&tokenid=" + token +
 				"&" + MainActivity.WEBAPP_CONFIG_LICENSEPRGVER + "=" + getAppVersion() +
 				"&" + MainActivity.WEBAPP_CONFIG_LICENSETYPE + "=playstore";
@@ -86,13 +76,10 @@ public class ServiceRegistrationIntent extends IntentService
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             StringBuilder result = new StringBuilder();
             String line;
-            while ((line = reader.readLine()) != null)
-			{
+            while ((line = reader.readLine()) != null) {
                 result.append(line);
             }
-        }
-		catch (IOException e)
-		{
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
