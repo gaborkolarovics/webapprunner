@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<string name="base_yes">Igen</string>
+	<string name="base_no">Nem</string>
+
     <string name="app_name">WebAppRunner</string>
     <string name="web_settings">Alkalmazás beállítás</string>
     <string name="url">Url</string>
@@ -16,8 +19,6 @@
     <string name="btn_clear">Törlés</string>
     <string name="btn_cancel">Mégse</string>
     <string name="btn_ok">Ok</string>
-	<string name="btn_yes">Igen</string>
-	<string name="btn_no">Nem</string>
 	<string name="page_reload">Oldal frissítés</string>
 	<string name="open_config">Beállítások</string>
     <string name="netEnabled">Hálózati helymeghatározás engedélyezve..</string>
@@ -51,13 +52,6 @@
 		<item>Vacsora</item>
 		<item>Új funkció</item>
     </string-array>
-
-	<!-- Rate -->
-	<string name="rate_dialog_title">Értékelés</string>
-	<string name="rate_dialog_message">Ha tetszik az alkalmazás, kérlek szánj egy percet arra, hogy értékeled. Köszönöm a támogatást!</string>
-    <string name="rate_dialog_ok">Igen, értékelem</string>
-    <string name="rate_dialog_cancel">Emlékeztess később</string>
-    <string name="rate_dialog_no">Nem, köszönöm</string>
 
 </resources>
 

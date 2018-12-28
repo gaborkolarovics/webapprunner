@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentTransaction;
 
 import org.sufficientlysecure.donations.DonationsFragment;
 
-
 public class DonationActivity  extends FragmentActivity
 {
 
@@ -23,14 +22,14 @@ public class DonationActivity  extends FragmentActivity
      * PayPal
      */
     private static final String PAYPAL_USER = "kiskope@vipmail.hu";
-    private static final String PAYPAL_CURRENCY_CODE = "EUR";
+    private static final String PAYPAL_CURRENCY_CODE = "HUF";
 
     /**
      * Flattr
      */
-    private static final String FLATTR_PROJECT_URL = "https://github.com/dschuermann/android-donations-lib/";
+    private static final String FLATTR_PROJECT_URL = "";
     // FLATTR_URL without http:// !
-    private static final String FLATTR_URL = "flattr.com/thing/712895/dschuermannandroid-donations-lib-on-GitHub";
+    private static final String FLATTR_URL = "";
 
     /**
      * Bitcoin
@@ -50,8 +49,8 @@ public class DonationActivity  extends FragmentActivity
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         DonationsFragment donationsFragment;
 		donationsFragment = DonationsFragment.newInstance(false, true, GOOGLE_PUBKEY, GOOGLE_CATALOG,
-														  getResources().getStringArray(R.array.donation_google_catalog_values), true, PAYPAL_USER, PAYPAL_CURRENCY_CODE,
-														  getString(R.string.donation_paypal_item), false, FLATTR_URL, FLATTR_PROJECT_URL, false, BITCOIN_ADDRESS);
+			getResources().getStringArray(R.array.donation_google_catalog_values), true, PAYPAL_USER, PAYPAL_CURRENCY_CODE,
+			getString(R.string.donation_paypal_item), false, FLATTR_URL, FLATTR_PROJECT_URL, false, BITCOIN_ADDRESS);
         ft.replace(R.id.donations_activity_container, donationsFragment, "donationsFragment");
         ft.commit();
     }

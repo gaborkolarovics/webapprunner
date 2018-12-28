@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -15,6 +16,7 @@ import java.util.Date;
  */
 public class PreferenceHelper
 {
+
 	public static final String WEBAPP_DEFAULT_URL = "file:///android_asset/index.html";
 
 	private static final String CONFIG_FULLSCREEN = "fullscreen";
@@ -24,9 +26,10 @@ public class PreferenceHelper
 	private static final String CONFIG_RATE_LAST_REMIND_DATE = "ratelastreminddate";
 	private static final String CONFIG_RATE_LAUNCH_COUNT = "ratelaunchcount";
 	private static final String CONFIG_RATE_INSTALL_DATE = "rateinstalldate";
+	private static final String CONFIG_WIDGET_GET_URL = "httpgetwidgeturl";
 
 	/**
-	 * Privage constructor
+	 * Private constructor
 	 */
 	private PreferenceHelper()
 	{
@@ -157,4 +160,31 @@ public class PreferenceHelper
 		}
 		return date;
 	}
+
+	/**
+	 * Get human readable install date
+	 */
+	public static String getInstallDateForHumans(final Context context)
+	{
+		final long installDate = getInstallDate(context);
+		SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd");
+		return df.format(new Date(installDate));
+	}
+
+	/**
+	 * Get HttpGet widget url
+	 */
+	public static String getHttpGetWidgetUrl(final Context context, final int widgetId)
+	{
+		return getPreferences(context).getString(CONFIG_WIDGET_GET_URL + widgetId, "");
+	}
+
+	/**
+	 * Set HttpGet widget url
+	 */
+	public static void setHttpGetWidgetUtl(final Context context, final int widgetId, final String url)
+	{
+		getPreferencesEditor(context).putString(CONFIG_WIDGET_GET_URL + widgetId, url).apply();
+	}
+
 }
