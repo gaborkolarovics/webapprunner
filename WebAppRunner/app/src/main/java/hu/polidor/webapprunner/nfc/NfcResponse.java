@@ -2,14 +2,14 @@ package hu.polidor.webapprunner.nfc;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.*;
+import java.util.ArrayList;
 
 public class NfcResponse implements Serializable
 {
 	private NfcReaderStatus status;
 
 	private List<TagRecord> records;
-	
+
 	public NfcReaderStatus getStatus()
 	{
 		return status;

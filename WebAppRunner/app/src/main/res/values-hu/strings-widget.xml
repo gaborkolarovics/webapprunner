@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	
+	<string name="widget__invalid_widget_id">Érvénytelen widget!</string>
+	<string name="widget__config_label">[szerk.]</string>
+	<string name="widget__get_url">Add meg az URL-t</string>
+
+</resources>

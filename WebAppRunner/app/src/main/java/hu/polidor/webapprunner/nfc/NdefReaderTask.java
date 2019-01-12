@@ -21,14 +21,16 @@ import static hu.polidor.webapprunner.Const.TAG;
 
 public class NdefReaderTask extends AsyncTask<Tag, Void, NfcResponse>
 {
+
 	private AsyncTaskListener<NfcResponse> listener;
 	private Map<Integer, String> resValues;
 
-	NdefReaderTask(final AsyncTaskListener<NfcResponse> listener, Map<Integer, String> resValues) {
+	NdefReaderTask(final AsyncTaskListener<NfcResponse> listener, Map<Integer, String> resValues)
+	{
 		this.listener = listener;
 		this.resValues = resValues;
 	}
-	
+
     @Override
     protected NfcResponse doInBackground(Tag... params)
 	{
@@ -107,7 +109,8 @@ public class NdefReaderTask extends AsyncTask<Tag, Void, NfcResponse>
     @Override
     protected void onPostExecute(NfcResponse result)
 	{
-		if (listener != null) {
+		if (listener != null)
+		{
 			listener.OnTaskCompleted(result);
 		}
     }

@@ -12,17 +12,12 @@
 	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 	<uses-permission android:name="com.android.vending.BILLING" />
 
-	<!--
-		Hardware rquirements
-	<uses-feature
-		android:name="android.hardware.nfc"
-		android:required="true" />
-	-->
-		
     <application
+		android:name=".WebAppRunnerApplication"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:allowBackup="false">
+        android:allowBackup="false"
+		android:resizeableActivity="false">
 
         <activity
             android:name=".MainActivity"
@@ -36,7 +31,7 @@
         </activity>
 
         <activity
-            android:name=".WebAppSettings"
+            android:name=".settings.WebAppSettings"
             android:label="@string/app_name" />
 
         <activity
@@ -52,11 +47,11 @@
 		<activity
             android:name=".shortcut.UrlShortcutActivity"
             android:label="@string/title_shortcut" />
-		
+
 		<activity
 			android:name=".DonationActivity"
 			android:label="@string/title_donation" />
-		
+
 		<activity
             android:name=".nfc.NfcReaderActivity"
             android:label="@string/title_nfcread"
@@ -67,6 +62,12 @@
 			</intent-filter>
 		</activity>
 
+		<activity android:name=".widget.HttpGetConfigureActivity">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+            </intent-filter>
+        </activity>
+
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
@@ -76,6 +77,17 @@
                 <category android:name="hu.polidor.webapprunner" />
             </intent-filter>
         </receiver>
+		
+		<receiver android:name=".widget.HttpGetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_httpget_provider" />
+        </receiver>
+
         <service
             android:name="hu.polidor.webapprunner.ServiceGcmListener"
             android:exported="false" >
@@ -83,6 +95,7 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
+		
         <service
             android:name="hu.polidor.webapprunner.ServiceInstanceIDListener"
             android:exported="false">
@@ -90,15 +103,17 @@
                 <action android:name="com.google.android.gms.iid.InstanceID"/>
             </intent-filter>
         </service>
+		
         <service
             android:name="hu.polidor.webapprunner.ServiceRegistrationIntent"
             android:exported="false">
         </service>
+		
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
 		App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+        <!-- meta-data
+		android:name="com.google.android.gms.version"
+		android:value="@integer/google_play_services_version" / -->
 
     </application>
 

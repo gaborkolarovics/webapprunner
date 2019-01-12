@@ -2,6 +2,9 @@ package hu.polidor.webapprunner.common;
 
 import android.app.Activity;
 import android.os.Build;
+import android.preference.Preference;
+import android.preference.PreferenceFragment;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
@@ -32,14 +35,13 @@ public final class Utils
 		{
             if (GooglePlayServicesUtil.isUserRecoverableError(resultCode))
 			{
-                GooglePlayServicesUtil.getErrorDialog(resultCode, activity,
-													  PLAY_SERVICES_RESOLUTION_REQUEST).show();
+                GooglePlayServicesUtil.getErrorDialog(resultCode, activity, PLAY_SERVICES_RESOLUTION_REQUEST).show();
             }
             return false;
         }
         return true;
     }
-	
+
 	/**
 	 * Generate unique device Id
 	 *
@@ -59,7 +61,7 @@ public final class Utils
         }
         return new UUID(m_szDevIDShort.hashCode(), serial.hashCode()).toString();
     }
-	
+
 	/**
 	 * Check the target date has past after threshold day
 	 *
@@ -67,8 +69,24 @@ public final class Utils
 	 * @param treshold The day count
 	 * @return boolean
 	 */
-	public static boolean isOverDate(long targetDate, int threshold) {
+	public static boolean isOverDate(long targetDate, int threshold)
+	{
         return new Date().getTime() - targetDate >= threshold * 24 * 60 * 60 * 1000;
     }
-	
+
+	/**
+	 * Set preference summary
+	 *
+	 * @param preferenceFragment The actual fregment
+	 * @param id The modified preference
+	 * @param summary The content
+	 * @param enabled The preference has enabled
+	 */
+	public static void setSummary(final PreferenceFragment preferenceFregment, final String id, final String summary, final boolean enabled)
+	{
+		Preference preference  = preferenceFregment.findPreference(id);
+		preference.setSummary(summary);
+		preference.setEnabled(enabled);
+	}
+
 }

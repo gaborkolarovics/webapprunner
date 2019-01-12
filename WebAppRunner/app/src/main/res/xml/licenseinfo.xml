@@ -5,5 +5,17 @@
             android:key="deviceid"
             android:summary=""
             android:title="@string/device_id" />
+		<EditTextPreference
+			android:key="rate_install_date"
+			android:summary=""
+			android:title="@string/rate_install_date" />
+		<EditTextPreference
+			android:key="rate_dialog_approved"
+			android:summary=""
+			android:title="@string/rate_dialog_approved" />
+		<EditTextPreference
+			android:key="rate_apprun_count"
+			android:summary=""
+			android:title="@string/rate_apprun_count" />
     </PreferenceCategory>
 </PreferenceScreen>
