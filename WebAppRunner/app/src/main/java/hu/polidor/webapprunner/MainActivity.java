@@ -2,11 +2,14 @@ package hu.polidor.webapprunner;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -24,16 +27,21 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import hu.polidor.webapprunner.common.PreferenceHelper;
 import hu.polidor.webapprunner.common.Utils;
+import hu.polidor.webapprunner.donate.DonationActivity;
 import hu.polidor.webapprunner.rate.AppRate;
 import hu.polidor.webapprunner.settings.WebAppSettings;
 import hu.polidor.webapprunner.shortcut.UrlShortcutActivity;
 
 import static hu.polidor.webapprunner.Const.TAG;
+import com.google.firebase.messaging.*;
+import com.google.android.gms.tasks.*;
+import com.google.firebase.iid.*;
 
 public class MainActivity extends Activity
 {
@@ -89,6 +97,7 @@ public class MainActivity extends Activity
     @Override
     public void onCreate(Bundle savedInstanceState)
 	{
+		Log.d(Const.TAG, "Start onCreate [main activity]");
         super.onCreate(savedInstanceState);
         mContext = this;
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -104,12 +113,27 @@ public class MainActivity extends Activity
 		}
 		deviceId = PreferenceHelper.getDeviceId(this);
         appurl = getURL(getIntent(), false);
+		Log.d(TAG, "Register receiver.");
         registerReceiver();
 
-        if (Utils.checkPlayServices(this))
+		Log.d(TAG, "Check play service [main activity]");
+
+        if (Utils.isPlayServicesAvailable(this))
 		{
-            Intent intent = new Intent(this, ServiceRegistrationIntent.class);
-            startService(intent);
+
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+			{
+				// Create channel to show notifications.
+				String channelId  = "default"; //getString(R.string.default_notification_channel_id);
+				String channelName = "default"; //getString(R.string.default_notification_channel_name);
+				NotificationManager notificationManager =
+                    getSystemService(NotificationManager.class);
+				notificationManager.createNotificationChannel(new NotificationChannel(channelId,
+						channelName, NotificationManager.IMPORTANCE_LOW));
+			}
+
+			FirebaseMessaging.getInstance().setAutoInitEnabled(true);
+			PreferenceHelper.setC2mToken(this, FirebaseInstanceId.getInstance().getToken());
         }
 
         WebSettings webSettings = webView.getSettings();
@@ -143,6 +167,7 @@ public class MainActivity extends Activity
 			});
 
 		AppRate.ShowRateDialogIfConditionsApply(this);
+		Log.d(Const.TAG, "End onCreate [main activity]");
     }
 
     @Override
@@ -209,6 +234,7 @@ public class MainActivity extends Activity
 	protected void onNewIntent(Intent intent)
 	{
 		super.onNewIntent(intent);
+		Log.d(TAG, "OnNewIntent (mainactivity)");
 		appurl = getURL(intent, true);
 		if (!appurl.isEmpty())
 		{

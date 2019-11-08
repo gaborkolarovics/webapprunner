@@ -8,8 +8,6 @@ import android.net.Uri;
 import hu.polidor.webapprunner.common.PreferenceHelper;
 import hu.polidor.webapprunner.common.Utils;
 
-import static com.google.android.gms.common.GooglePlayServicesUtil.GOOGLE_PLAY_STORE_PACKAGE;
-
 /**
  * Positive answer to applicaton rate question
  *
@@ -31,13 +29,18 @@ public class PositiveAnswer implements DialogInterface.OnClickListener
 	 */
 	private static final String GOOGLE_PLAY = "https://play.google.com/store/apps/details?id=";
 
+	/**
+	 * Google play store package name
+	 */
+	private static final String GOOGLE_PLAY_STORE_PACKAGE = "com.android.vending";
+
 	@Override
 	public void onClick(DialogInterface dialogInterface, int action)
 	{
 		PreferenceHelper.setRateDialogApproved(activity, true);
 		String packageName = activity.getPackageName();
 		Intent intent = new Intent(Intent.ACTION_VIEW, packageName == null ? null : Uri.parse(GOOGLE_PLAY + packageName));
-		if (Utils.checkPlayServices(activity))
+		if (Utils.isPlayServicesAvailable(activity))
 		{
 			intent.setPackage(GOOGLE_PLAY_STORE_PACKAGE);
 		}

@@ -28,6 +28,7 @@ public class LicencInfo extends PreferenceFragment
 		setSummary(this, "rate_dialog_approved", PreferenceHelper.getRateDialogApproved(getContext()) ? 
 			getResources().getString(R.string.base_yes) : getResources().getString(R.string.base_no), false);
 		setSummary(this, "rate_apprun_count", Integer.toString(PreferenceHelper.getLaunchCount(getContext())), false);
+		setSummary(this, "c2m_token", PreferenceHelper.getC2mToken(getContext()), false);
 	}
 
 }

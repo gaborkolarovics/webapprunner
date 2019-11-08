@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/license">
+		
         <EditTextPreference
             android:key="deviceid"
             android:summary=""
@@ -17,5 +18,10 @@
 			android:key="rate_apprun_count"
 			android:summary=""
 			android:title="@string/rate_apprun_count" />
+		<EditTextPreference
+			android:key="c2m_token"
+			android:summary=""
+			android:title="@string/settings_notification_token" />
+
     </PreferenceCategory>
 </PreferenceScreen>

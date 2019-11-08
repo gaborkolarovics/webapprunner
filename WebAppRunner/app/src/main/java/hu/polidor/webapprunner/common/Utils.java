@@ -6,7 +6,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 import java.util.Date;
 import java.util.UUID;
@@ -21,6 +21,8 @@ public final class Utils
 {
 
 	private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+	
+	private static final int ONE_DAY = 24 * 60 * 60 * 1000;
 
 	/**
 	 * Check the GooglePlayService is available
@@ -28,17 +30,18 @@ public final class Utils
 	 * @param Activity Current context
 	 * @return boolean
 	 */
-	public static boolean checkPlayServices(Activity activity)
+	public static boolean isPlayServicesAvailable(Activity activity)
 	{
-        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(activity);
-        if (resultCode != ConnectionResult.SUCCESS)
+		GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
+		int status = googleApiAvailability.isGooglePlayServicesAvailable(activity);
+		if (status != ConnectionResult.SUCCESS)
 		{
-            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode))
+			if (googleApiAvailability.isUserResolvableError(status))
 			{
-                GooglePlayServicesUtil.getErrorDialog(resultCode, activity, PLAY_SERVICES_RESOLUTION_REQUEST).show();
-            }
-            return false;
-        }
+				googleApiAvailability.getErrorDialog(activity, status, PLAY_SERVICES_RESOLUTION_REQUEST).show();
+			}
+			return false;
+		}
         return true;
     }
 
@@ -71,7 +74,7 @@ public final class Utils
 	 */
 	public static boolean isOverDate(long targetDate, int threshold)
 	{
-        return new Date().getTime() - targetDate >= threshold * 24 * 60 * 60 * 1000;
+        return new Date().getTime() - targetDate >= threshold * ONE_DAY;
     }
 
 	/**

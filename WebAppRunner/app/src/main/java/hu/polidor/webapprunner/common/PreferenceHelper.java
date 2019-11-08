@@ -27,6 +27,7 @@ public class PreferenceHelper
 	private static final String CONFIG_RATE_LAUNCH_COUNT = "ratelaunchcount";
 	private static final String CONFIG_RATE_INSTALL_DATE = "rateinstalldate";
 	private static final String CONFIG_WIDGET_GET_URL = "httpgetwidgeturl";
+	private static final String CONFIG_C2M_TOKEN = "c2mtoken";
 
 	/**
 	 * Private constructor
@@ -185,6 +186,22 @@ public class PreferenceHelper
 	public static void setHttpGetWidgetUtl(final Context context, final int widgetId, final String url)
 	{
 		getPreferencesEditor(context).putString(CONFIG_WIDGET_GET_URL + widgetId, url).apply();
+	}
+	
+	/**
+	 * Get C2M token
+	 */
+	public static String getC2mToken(final Context context)
+	{
+		return getPreferences(context).getString(CONFIG_C2M_TOKEN, "");
+	}
+	
+	/**
+	 * Set C2M token
+	 */
+	public static void setC2mToken(final Context context, final String token)
+	{
+		getPreferencesEditor(context).putString(CONFIG_C2M_TOKEN, token).apply();
 	}
 
 }

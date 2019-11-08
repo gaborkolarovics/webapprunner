@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "517920729052",
+    "firebase_url": "https://webapprunner-1093.firebaseio.com",
+    "project_id": "webapprunner-1093",
+    "storage_bucket": "webapprunner-1093.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517920729052:android:910391aecd8b2d2e",
+        "android_client_info": {
+          "package_name": "hu.polidor.webapprunner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "517920729052-s94oq2o2r0me6o3lmtab0dvcu78civet.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwXeqdiSnsGOlfL-wvaLAzhnvVLJzVG-o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
