@@ -1,13 +1,17 @@
 package hu.polidor.webapprunner;
 
 import android.content.Context;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import java.net.MalformedURLException;
 import java.net.URL;
+
+// import android.support.v4.widget.SwipeRefreshLayout;
 
 public class WebAppWebViewClient extends WebViewClient
 {
@@ -45,7 +49,7 @@ public class WebAppWebViewClient extends WebViewClient
     public boolean shouldOverrideUrlLoading(WebView view, String url)
 	{
         pbStatus.setProgress(0);
-        pbStatus.setVisibility(pbStatus.VISIBLE);
+        pbStatus.setVisibility(View.VISIBLE);
         setLocalUrl(url);
         view.loadUrl(url);
         return true;
@@ -54,7 +58,7 @@ public class WebAppWebViewClient extends WebViewClient
     @Override
     public void onPageFinished(WebView view, String url)
 	{
-        pbStatus.setVisibility(pbStatus.INVISIBLE);
+        pbStatus.setVisibility(View.INVISIBLE);
 		swipeRL.setRefreshing(false);
         setLocalUrl(url);
 		setLastUrl(url);

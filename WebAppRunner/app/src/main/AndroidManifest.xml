@@ -12,9 +12,9 @@
 
     <application
 		android:name=".WebAppRunnerApplication"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:allowBackup="false"
+		android:allowBackup="false"
+		android:icon="@drawable/ic_launcher"
+		android:label="@string/app_name"
 		android:resizeableActivity="false">
 
 		<!-- [START fcm_default_channel] -->

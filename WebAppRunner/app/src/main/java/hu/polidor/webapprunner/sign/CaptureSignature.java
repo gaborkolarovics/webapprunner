@@ -49,14 +49,14 @@ public class CaptureSignature extends Activity
 
 		this.setRequestedOrientation(orientation);
 
-        mContent = (LinearLayout) findViewById(R.id.linearLayout);
+        mContent = findViewById(R.id.linearLayout);
         mSignature = new signature(this, null);
         mSignature.setBackgroundColor(Color.WHITE);
         mContent.addView(mSignature, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-        mClear = (Button) findViewById(R.id.clear);
-        mGetSign = (Button) findViewById(R.id.getsign);
+        mClear = findViewById(R.id.clear);
+        mGetSign = findViewById(R.id.getsign);
         mGetSign.setEnabled(false);
-        mCancel = (Button) findViewById(R.id.cancel);
+        mCancel = findViewById(R.id.cancel);
         mView = mContent;
 
         mClear.setOnClickListener(new OnClickListener() {

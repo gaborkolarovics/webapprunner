@@ -1,5 +1,6 @@
 package hu.polidor.webapprunner.widget;
 
+import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.view.View;
@@ -38,7 +39,7 @@ public class HttpGetConfigureListener implements OnClickListener
 
 		final Intent resultValue = new Intent();
 		resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, httpGetConfigure.getWidgetId());
-		httpGetConfigure.setResult(httpGetConfigure.RESULT_OK, resultValue);
+		httpGetConfigure.setResult(Activity.RESULT_OK, resultValue);
 		httpGetConfigure.finish();
 	}
 

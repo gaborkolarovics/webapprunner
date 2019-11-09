@@ -191,7 +191,7 @@ public class IabHelper {
          *
          * @param result The result of the setup process.
          */
-        public void onIabSetupFinished(IabResult result);
+        void onIabSetupFinished(IabResult result);
     }
 
     /**
@@ -324,7 +324,7 @@ public class IabHelper {
          * @param result The result of the purchase.
          * @param info The purchase information (null if purchase failed)
          */
-        public void onIabPurchaseFinished(IabResult result, Purchase info);
+        void onIabPurchaseFinished(IabResult result, Purchase info);
     }
 
     // The listener registered on launchPurchaseFlow, which we have to call back when
@@ -512,7 +512,7 @@ public class IabHelper {
             if (mPurchaseListener != null) mPurchaseListener.onIabPurchaseFinished(result, null);
         }
         else {
-            logError("Purchase failed. Result code: " + Integer.toString(resultCode)
+            logError("Purchase failed. Result code: " + resultCode
                     + ". Response: " + getResponseDesc(responseCode));
             result = new IabResult(IABHELPER_UNKNOWN_PURCHASE_RESPONSE, "Unknown purchase response.");
             if (mPurchaseListener != null) mPurchaseListener.onIabPurchaseFinished(result, null);
@@ -590,7 +590,7 @@ public class IabHelper {
          * @param result The result of the operation.
          * @param inv The inventory.
          */
-        public void onQueryInventoryFinished(IabResult result, Inventory inv);
+        void onQueryInventoryFinished(IabResult result, Inventory inv);
     }
 
 
@@ -698,7 +698,7 @@ public class IabHelper {
          * @param purchase The purchase that was (or was to be) consumed.
          * @param result The result of the consumption operation.
          */
-        public void onConsumeFinished(Purchase purchase, IabResult result);
+        void onConsumeFinished(Purchase purchase, IabResult result);
     }
 
     /**
@@ -712,7 +712,7 @@ public class IabHelper {
          * @param results The results of each consumption operation, corresponding to each
          *     sku.
          */
-        public void onConsumeMultiFinished(List<Purchase> purchases, List<IabResult> results);
+        void onConsumeMultiFinished(List<Purchase> purchases, List<IabResult> results);
     }
 
     /**
@@ -768,10 +768,10 @@ public class IabHelper {
         if (code <= IABHELPER_ERROR_BASE) {
             int index = IABHELPER_ERROR_BASE - code;
             if (index >= 0 && index < iabhelper_msgs.length) return iabhelper_msgs[index];
-            else return String.valueOf(code) + ":Unknown IAB Helper Error";
+            else return code + ":Unknown IAB Helper Error";
         }
         else if (code < 0 || code >= iab_msgs.length)
-            return String.valueOf(code) + ":Unknown";
+            return code + ":Unknown";
         else
             return iab_msgs[code];
     }
@@ -845,7 +845,7 @@ public class IabHelper {
                     itemType, continueToken);
 
             int response = getResponseCodeFromBundle(ownedItems);
-            logDebug("Owned items response: " + String.valueOf(response));
+            logDebug("Owned items response: " + response);
             if (response != BILLING_RESPONSE_RESULT_OK) {
                 logDebug("getPurchases() failed: " + getResponseDesc(response));
                 return response;

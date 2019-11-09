@@ -8,18 +8,19 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.webkit.JavascriptInterface;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.google.zxing.integration.android.IntentIntegrator;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import hu.polidor.webapprunner.common.PreferenceHelper;
 import hu.polidor.webapprunner.nfc.NfcReaderActivity;
 import hu.polidor.webapprunner.sign.CaptureSignature;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class WebAppJsProxy
 {
@@ -95,8 +96,8 @@ public class WebAppJsProxy
                 v.vibrate(800);
                 break;
             case "PATTERN":
-                String arrstr[] = vibratePattern.split(",");
-                long pattern[] = convertPattern(arrstr);
+                String[] arrstr = vibratePattern.split(",");
+                long[] pattern = convertPattern(arrstr);
                 v.vibrate(pattern, -1);
                 break;
             default:
@@ -162,7 +163,7 @@ public class WebAppJsProxy
 
     private long[] convertPattern(String[] string)
 	{
-        long number[] = new long[string.length];
+        long[] number = new long[string.length];
         for (int i = 0; i < string.length; i++)
 		{
             try

@@ -11,13 +11,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -27,6 +23,10 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -39,9 +39,6 @@ import hu.polidor.webapprunner.settings.WebAppSettings;
 import hu.polidor.webapprunner.shortcut.UrlShortcutActivity;
 
 import static hu.polidor.webapprunner.Const.TAG;
-import com.google.firebase.messaging.*;
-import com.google.android.gms.tasks.*;
-import com.google.firebase.iid.*;
 
 public class MainActivity extends Activity
 {
@@ -64,7 +61,6 @@ public class MainActivity extends Activity
     public static final String WEBAPP_CONFIG_LICENSETYPE = "licensetype";
     public static final String WEBAPP_CONFIG_LICENSEDATE = "licensedate";
     public static final String WEBAPP_CONFIG_LICENSECHK = "licenselastchk";
-	public static final String WEBAPP_CONFIG_LICENSEPRGVER = "programversion";
 
     public static final String WEBAPP_INTENT_URL = "intenturl";
     public static final String REGISTRATION_COMPLETE = "registrationComplete";
@@ -264,7 +260,7 @@ public class MainActivity extends Activity
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState)
+    protected void onSaveInstanceState(final Bundle outState)
 	{
         webView.saveState(outState);
         super.onSaveInstanceState(outState);

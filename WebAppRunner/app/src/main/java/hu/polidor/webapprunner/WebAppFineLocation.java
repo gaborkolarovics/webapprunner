@@ -50,7 +50,7 @@ public class WebAppFineLocation extends Activity implements LocationListener
             }
 			else
 			{
-                tvTime.setText(String.format(getResources().getString(R.string.please_wait_time), minTimeout).toString());
+                tvTime.setText(String.format(getResources().getString(R.string.please_wait_time), minTimeout));
                 handler.postDelayed(this, 1000);
             }
         }
@@ -62,11 +62,11 @@ public class WebAppFineLocation extends Activity implements LocationListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.location);
 
-        btnOk = (Button) findViewById(R.id.locget);
-        btnCancel = (Button) findViewById(R.id.loccancel);
-        tvAcc = (TextView) findViewById(R.id.tvAccuracy);
-        tvLoc = (TextView) findViewById(R.id.tvLocation);
-        tvTime = (TextView) findViewById(R.id.tvTime);
+        btnOk = findViewById(R.id.locget);
+        btnCancel = findViewById(R.id.loccancel);
+        tvAcc = findViewById(R.id.tvAccuracy);
+        tvLoc = findViewById(R.id.tvLocation);
+        tvTime = findViewById(R.id.tvTime);
 
         btnCancel.setOnClickListener(new OnClickListener() {
 				public void onClick(View v)
@@ -98,7 +98,7 @@ public class WebAppFineLocation extends Activity implements LocationListener
 		{
             handler.postDelayed(runnable, 1000);
 			tvLoc.setText("");
-			tvTime.setText(String.format(getResources().getString(R.string.please_wait_time), minTimeout).toString());
+			tvTime.setText(String.format(getResources().getString(R.string.please_wait_time), minTimeout));
             if (isNetworkEnabled)
 			{
                 lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
@@ -148,26 +148,26 @@ public class WebAppFineLocation extends Activity implements LocationListener
     @Override
     public void onStatusChanged(String p1, int p2, Bundle p3)
 	{
-        // TODO: Implement this method
+        // noop
     }
 
     @Override
     public void onProviderEnabled(String p1)
 	{
-        // TODO: Implement this method
+        // noop
     }
 
     @Override
     public void onProviderDisabled(String p1)
 	{
-        // TODO: Implement this method
+        // noop
     }
 
     private void ShowLocation()
 	{
-		tvLoc.setText(String.format(getResources().getString(R.string.loc_coor), loc.getLongitude(), loc.getLatitude()).toString());
+		tvLoc.setText(String.format(getResources().getString(R.string.loc_coor), loc.getLongitude(), loc.getLatitude()));
         tvTime.setText(format.format(loc.getTime()));
-        tvAcc.setText(String.format(getResources().getString(R.string.loc_accu), loc.getAccuracy(), loc.getProvider()).toString());
+        tvAcc.setText(String.format(getResources().getString(R.string.loc_accu), loc.getAccuracy(), loc.getProvider()));
     }
 
     private void CancelLocation()

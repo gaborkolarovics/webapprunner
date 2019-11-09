@@ -2,16 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-	<android.support.v4.widget.SwipeRefreshLayout
+
+	<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 		android:id="@+id/swipeRefreshLayout"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent" >
+		android:layout_height="match_parent">
 
 		<WebView
 			android:id="@+id/webview"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent" />
-	</android.support.v4.widget.SwipeRefreshLayout>
+
+	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 	<ProgressBar
         android:id="@+id/pbProgress"
         style="?android:attr/progressBarStyleHorizontal"
@@ -22,5 +25,6 @@
         android:paddingTop="10dp"
         android:progressDrawable="@drawable/progressbar_horizontal"
         android:visibility="visible" />
+
 </RelativeLayout>
 

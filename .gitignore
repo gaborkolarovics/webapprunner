@@ -1,4 +1,5 @@
-/.idea
+.idea
+.gradle
 /webapp/.buildpath
 /webapp/.project
 /webapp/.settings/*
