@@ -142,6 +142,7 @@ public class MainActivity extends Activity
 
                             // Get new Instance ID token
                             String token = task.getResult().getToken();
+                            Log.d(TAG, "Get new token [MainActivity]: " + token);
                             PreferenceHelper.setC2mToken(MainActivity.this, token);
                         }
                     });

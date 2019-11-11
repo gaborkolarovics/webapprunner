@@ -16,11 +16,10 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import hu.polidor.webapprunner.MainActivity;
+import hu.polidor.webapprunner.R;
 import hu.polidor.webapprunner.common.PreferenceHelper;
 
 import static hu.polidor.webapprunner.Const.TAG;
-
-// import android.support.v4.app.NotificationCompat;
 
 /**
  * Push notification and device token reciever service
@@ -35,13 +34,16 @@ public class NotificationIIDListenerService extends FirebaseMessagingService
 	public void onNewToken(String token)
 	{
 		super.onNewToken(token);
+		Log.d(TAG, "Get new token [NotificationIIDListenerService]: " + token);
 		PreferenceHelper.setC2mToken(this, token);
 	}
 
 	@Override
-	public void onMessageReceived(RemoteMessage remoteMessage)
+	public void onMessageReceived(final RemoteMessage remoteMessage)
 	{
-		Log.d(TAG, "Recieve : " + remoteMessage.getMessageId());
+		Log.d(TAG, "Recieve id: " + remoteMessage.getMessageId());
+		Log.d(TAG, "Recieve type: " + remoteMessage.getMessageType());
+		Log.d(TAG, "Recieve body: " + remoteMessage.getNotification().getBody());
 
 		sendNotification(remoteMessage.getNotification().getBody());
 
@@ -64,10 +66,10 @@ public class NotificationIIDListenerService extends FirebaseMessagingService
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder =
 			new NotificationCompat.Builder(this) //channelId
-			//.setSmallIcon(R.drawable.ic_stat_ic_notification)
-			//.setContentTitle(getString(R.string.fcm_message))
+			.setContentTitle("contentTitle")
 			.setContentText(messageBody)
-			.setAutoCancel(true)
+			.setSmallIcon(R.drawable.ic_launcher)
+			.setAutoCancel(false)
 			.setSound(defaultSoundUri)
 			.setContentIntent(pendingIntent);
 

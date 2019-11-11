@@ -4,19 +4,14 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Vibrator;
-import android.preference.PreferenceManager;
 import android.webkit.JavascriptInterface;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.zxing.integration.android.IntentIntegrator;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import hu.polidor.webapprunner.common.PreferenceHelper;
 import hu.polidor.webapprunner.nfc.NfcReaderActivity;
@@ -45,23 +40,9 @@ public class WebAppJsProxy
     }
 
 	@JavascriptInterface
-    public String getLicenseInfo()
-	{
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
-		JSONObject jsonObject = new JSONObject();
-        try
-		{
-            jsonObject.put(MainActivity.WEBAPP_CONFIG_LICENSETYPE, sharedPref.getString(MainActivity.WEBAPP_CONFIG_LICENSETYPE, ""));
-			jsonObject.put(MainActivity.WEBAPP_CONFIG_LICENSEDATE, sharedPref.getString(MainActivity.WEBAPP_CONFIG_LICENSEDATE, ""));
-        	jsonObject.put(MainActivity.WEBAPP_CONFIG_LICENSECHK, sharedPref.getString(MainActivity.WEBAPP_CONFIG_LICENSECHK, ""));
-        }
-		catch (JSONException e)
-		{
-            e.printStackTrace();
-        }
-
-		return jsonObject.toString();
-    }
+	public String getToken() {
+    	return PreferenceHelper.getC2mToken(activity);
+	}
 
 	@JavascriptInterface
     public String getURL()
