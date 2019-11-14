@@ -1,19 +1,32 @@
 package hu.polidor.webapprunner;
 
-public final class Const
-{
-	/**
-	 * Tag for application logging
-	 */
-	public static final String TAG = "_WEBAPP_";
+/**
+ * Constant holder class
+ *
+ * @author Gábor KOLÁROVICS
+ * @since 2019.11.14
+ */
+public final class Const {
 
-	/**
-	 * Config: Screen orientation properties
-	 */
-	public static final String CONF_SIGN_ORIENTATION = "signorientation";
+    /**
+     * Private constructor with exception because is a util class
+     */
+    private Const() {
+        throw new IllegalStateException("Constant holder class!");
+    }
 
-	/**
-	 * FCM: Application chanel name
-	 */
-	public static final String FCM_CHANEL_ID = "default";
+    /**
+     * Tag for application logging
+     */
+    public static final String TAG = "_WEBAPP_";
+
+    /**
+     * Config: Screen orientation properties
+     */
+    public static final String CONF_SIGN_ORIENTATION = "signorientation";
+
+    /**
+     * FCM: Application chanel name
+     */
+    public static final String FCM_CHANEL_ID = "default";
 }

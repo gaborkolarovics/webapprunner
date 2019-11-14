@@ -2,16 +2,10 @@ package hu.polidor.webapprunner;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +15,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,8 +32,6 @@ import hu.polidor.webapprunner.donate.DonationActivity;
 import hu.polidor.webapprunner.rate.AppRate;
 import hu.polidor.webapprunner.settings.WebAppSettings;
 import hu.polidor.webapprunner.shortcut.UrlShortcutActivity;
-
-import static hu.polidor.webapprunner.Const.TAG;
 
 public class MainActivity extends Activity {
 
@@ -60,29 +50,14 @@ public class MainActivity extends Activity {
     public static final String FINELOCATION_MINDIST = "mindistance";
     public static final String FINELOCATION_MINTIME = "mintimeout";
     public static final String WEBAPP_INTENT_URL = "intenturl";
-    public static final String REGISTRATION_COMPLETE = "registrationComplete";
 
     public ProgressBar pbStatus;
     public WebView webView;
     public WebAppWebViewClient webappWebViewClient = null;
     public String deviceId;
-    public static String appurl;
+    public String appurl;
 
-    private static Context mContext;
-    private BroadcastReceiver mRegistrationBroadcastReceiver;
-    private boolean isReceiverRegistered;
-
-    public static void makeMsg(String msg) {
-        Toast.makeText(mContext, msg, Toast.LENGTH_LONG).show();
-        Log.d(TAG, msg);
-    }
-
-    private void registerReceiver() {
-        if (!isReceiverRegistered) {
-            LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver, new IntentFilter(REGISTRATION_COMPLETE));
-            isReceiverRegistered = true;
-        }
-    }
+    private Context mContext;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -100,32 +75,18 @@ public class MainActivity extends Activity {
         }
         deviceId = PreferenceHelper.getDeviceId(this);
         appurl = getURL(getIntent(), false);
-        registerReceiver();
 
         if (Utils.isPlayServicesAvailable(this)) {
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                NotificationChannel mChannel = new NotificationChannel(Const.FCM_CHANEL_ID, getString(R.string.fcm_chanel_name), NotificationManager.IMPORTANCE_DEFAULT);
-                mChannel.setDescription(getString(R.string.fcm_chanel_description));
-                mChannel.enableLights(true);
-                mChannel.enableVibration(true);
-                if (mNotificationManager != null) {
-                    mNotificationManager.createNotificationChannel(mChannel);
-                }
-            }
 
             FirebaseInstanceId.getInstance().getInstanceId()
                     .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                         @Override
                         public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                            if (!task.isSuccessful()) {
-                                Log.w(TAG, "getInstanceId failed", task.getException());
-                                return;
+                            if (task.isSuccessful()) {
+                                // Get new Instance ID token
+                                String token = task.getResult().getToken();
+                                PreferenceHelper.setC2mToken(MainActivity.this, token);
                             }
-                            // Get new Instance ID token
-                            String token = task.getResult().getToken();
-                            PreferenceHelper.setC2mToken(MainActivity.this, token);
                         }
                     });
         }
@@ -157,7 +118,6 @@ public class MainActivity extends Activity {
         });
 
         AppRate.ShowRateDialogIfConditionsApply(this);
-        Log.d(Const.TAG, "End onCreate [main activity]");
     }
 
     @Override
@@ -213,7 +173,6 @@ public class MainActivity extends Activity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        Log.d(TAG, "OnNewIntent (mainactivity)");
         appurl = getURL(intent, true);
         if (!appurl.isEmpty()) {
             webappWebViewClient.setAppUrl(appurl);
@@ -223,19 +182,6 @@ public class MainActivity extends Activity {
                 webView.loadUrl(appurl);
             }
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        registerReceiver();
-    }
-
-    @Override
-    protected void onPause() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
-        isReceiverRegistered = false;
-        super.onPause();
     }
 
     @Override
@@ -314,11 +260,9 @@ public class MainActivity extends Activity {
 
     private String getURL(Intent i, Boolean onlyIntent) {
         String respURL = "";
-        if (i.getExtras() != null) {
-            if (i.getStringExtra(WEBAPP_INTENT_URL) != null && !i.getStringExtra(WEBAPP_INTENT_URL).isEmpty()) {
-                respURL = i.getStringExtra(WEBAPP_INTENT_URL);
-                i.removeExtra(WEBAPP_INTENT_URL);
-            }
+        if (i.getExtras() != null && i.getStringExtra(WEBAPP_INTENT_URL) != null && !i.getStringExtra(WEBAPP_INTENT_URL).isEmpty()) {
+            respURL = i.getStringExtra(WEBAPP_INTENT_URL);
+            i.removeExtra(WEBAPP_INTENT_URL);
         }
         if (!onlyIntent && respURL.isEmpty()) {
             respURL = PreferenceHelper.getUrl(this);
