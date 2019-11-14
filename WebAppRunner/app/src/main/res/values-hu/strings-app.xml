@@ -47,6 +47,9 @@
 	<string name="unsupported_encoding">Nem támogatott karaker kódolás!</string>
 	<string name="shortcut_not_supported">Parancsikon kihelyezése a képernyőre nem támogatott!</string>
 
+	<string name="fcm_chanel_name">Alkalmazás üzenetek</string>
+	<string name="fcm_chanel_description">Alapértelmezett alkalmazás üzenet csatorna</string>
+
 	<string-array name="donation_google_catalog_values">
         <item>Kávé</item>
         <item>Sör</item>

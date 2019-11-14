@@ -47,6 +47,9 @@
 	<string name="unsupported_encoding">Unsupported encoding.</string>
 	<string name="shortcut_not_supported">Pin shortcut request not supported!</string>
 
+	<string name="fcm_chanel_name">Application messages</string>
+	<string name="fcm_chanel_description">Default application notification chanel</string>
+
 	<string-array name="donation_google_catalog_values">
         <item>Coffee</item>
         <item>Beer</item>

@@ -42,7 +42,7 @@ public class CaptureSignature extends Activity
         setContentView(R.layout.signature);
 
 		int orientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
-		if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean(Const.WEBAPP_CONFIG_SIGN_ORIENTATION, false))
+		if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean(Const.CONF_SIGN_ORIENTATION, false))
 		{
 			orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
 		}
