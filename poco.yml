@@ -1,0 +1,11 @@
+version: '3.0'
+maintener: "gabor.kolarovics@gmail.com"
+
+environment:
+  include: cicd/conf/default/conf.env
+
+plan:
+  gfunc:
+    description: "Google functions developer"
+    docker-compose-file:
+      - cicd/dc-gfunc.yml

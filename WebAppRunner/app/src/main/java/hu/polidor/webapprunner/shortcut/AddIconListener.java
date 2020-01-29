@@ -8,6 +8,8 @@ import android.os.Build;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import androidx.annotation.RequiresApi;
+
 import hu.polidor.webapprunner.MainActivity;
 import hu.polidor.webapprunner.R;
 import hu.polidor.webapprunner.common.Utils;
@@ -24,10 +26,10 @@ public class AddIconListener implements OnClickListener {
     /**
      * Parent activity
      */
-    private UrlShortcutActivity urlShortcut;
+    private final UrlShortcutActivity urlShortcut;
 
     /**
-     * Construcor with parent activity
+     * Constructor with parent activity
      */
     public AddIconListener(final UrlShortcutActivity urlShortcut) {
         this.urlShortcut = urlShortcut;
@@ -38,9 +40,10 @@ public class AddIconListener implements OnClickListener {
      *
      * @param shortcutDto : Shortcut data
      */
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void createShortcutByShortcutManager(final ShortcutDto shortcutDto) {
         final ShortcutManager shortcutManager = urlShortcut.getSystemService(ShortcutManager.class);
-        if (shortcutManager.isRequestPinShortcutSupported()) {
+        if (shortcutManager != null && shortcutManager.isRequestPinShortcutSupported()) {
             final ShortcutInfo shortcut = new ShortcutInfo.Builder(urlShortcut, UUID.randomUUID().toString())
                     .setShortLabel(shortcutDto.getTitle())
                     .setIcon(Icon.createWithBitmap(shortcutDto.getScaledBitmapIcon()))
@@ -49,7 +52,6 @@ public class AddIconListener implements OnClickListener {
             shortcutManager.requestPinShortcut(shortcut, null);
         } else {
             Utils.makeMsg(urlShortcut, urlShortcut.getResources().getString(R.string.shortcut_not_supported));
-
         }
     }
 
