@@ -540,16 +540,15 @@ function setSignatureImage(imgimage) {
                     <div class="modal-body">
                         <h2>Info</h2>
                         <hr class="star-primary">
-                        <p>Token: <div id="notificationToken"></div></p>
                         <p>DeviceID: <div id="deviceId"></div></p>
                         <p>Url: <div id="configuredUrl"></div></p>
                         <br/>
-                        <button type="button" class="btn btn-default" onclick="GetToken()">Scan
-                            get information
-                        </button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><i
-                                class="fa fa-times"></i> Close
-                        </button>
+                        <p>Token: <input type="text" id="notificationToken" />
+                        <p>Message: <input type="text" id="msgText" value="test message.." />
+                        <br/>
+                        <button type="button" class="btn btn-default" onclick="GetToken()">Scan get information</button>
+                        <button type="button" class="btn btn-default" onclick="SendMessage()">Send message</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
                         <br/>
                         <code>
                             if (typeof WebAppRunner !== 'undefined') {<br/>

@@ -3,7 +3,6 @@ version: '3'
 services:
   gfunc:
     build: ${PROJECT_HOME}/cicd/dockerfile/gfunc
-    user: ${POCO_UID}:${POCO_GID}
     volumes:
       - ${PROJECT_HOME}/google-functions:/app
     ports:

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "517920729052-br0kcr5agt12l42aqu3j2dqneqqhk8gi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hu.polidor.webapprunner",
+            "certificate_hash": "b57c5c638010b88f4b616e5003d31c79b5c7cd00"
+          }
+        },
+        {
           "client_id": "517920729052-s94oq2o2r0me6o3lmtab0dvcu78civet.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -25,15 +33,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "517920729052-s94oq2o2r0me6o3lmtab0dvcu78civet.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
