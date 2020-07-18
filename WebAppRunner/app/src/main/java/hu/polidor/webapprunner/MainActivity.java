@@ -98,7 +98,7 @@ public class MainActivity extends Activity {
         webSettings.setSavePassword(false);
         webView.clearCache(true);
         webView.addJavascriptInterface(new WebAppJsProxy(this), "WebAppRunner");
-        webappWebViewClient = new WebAppWebViewClient(this, pbStatus, swipeRefreshLayout);
+        webappWebViewClient = new WebAppWebViewClient(pbStatus, swipeRefreshLayout);
         webappWebViewClient.setAppUrl(appurl);
         webView.setWebViewClient(webappWebViewClient);
         webView.setWebChromeClient(new WebAppWebChromeClient(pbStatus));

@@ -20,12 +20,10 @@ public class WebAppWebViewClient extends WebViewClient
     private boolean localURL;
     private String appUrl;
 	private String lastUrl;
-    private Context activity;
 	private SwipeRefreshLayout swipeRL;
 
-    public WebAppWebViewClient(Context activity, ProgressBar pbStatus, SwipeRefreshLayout swipeRL)
+    public WebAppWebViewClient(ProgressBar pbStatus, SwipeRefreshLayout swipeRL)
 	{
-        this.activity = activity;
         this.pbStatus = pbStatus;
 		this.swipeRL = swipeRL;
     }
