@@ -6,7 +6,7 @@
         android:title="@string/web_settings" />
 
     <header
-        android:fragment="hu.polidor.webapprunner.settings.LicencInfo"
+        android:fragment="hu.polidor.webapprunner.settings.LicenceInfo"
         android:title="@string/license" />
 
 </preference-headers>

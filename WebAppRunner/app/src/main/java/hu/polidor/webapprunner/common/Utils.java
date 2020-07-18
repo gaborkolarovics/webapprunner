@@ -60,7 +60,7 @@ public final class Utils {
      * @return String
      */
     public static String getUUID() {
-        final String cpuAbi = Build.SUPPORTED_ABIS.length > 0 ? Build.SUPPORTED_ABIS[0] : UUID.randomUUID().toString();
+        final String cpuAbi = getABIs();
         final String szDevIDShort = "35" +
                 (Build.BOARD.length() % 10) +
                 (Build.BRAND.length() % 10) +
@@ -70,6 +70,18 @@ public final class Utils {
                 (Build.MODEL.length() % 10) +
                 (Build.PRODUCT.length() % 10);
         return new UUID(szDevIDShort.hashCode(), getBuildSerial().hashCode()).toString();
+    }
+
+    /**
+     * Get first supported Application Binary Interface (ABI)
+     *
+     * @return String supported ABIs
+     */
+    private static String getABIs() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && Build.SUPPORTED_ABIS.length > 0) {
+            return Build.SUPPORTED_ABIS[0];
+        }
+        return "NOT_FOUND_SUPPORTED_ABI";
     }
 
     /**

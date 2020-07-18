@@ -5,9 +5,9 @@ var admin = require("firebase-admin");
 var serviceAccount = require("./webapprunner-1093-firebase-adminsdk-ftbvi-db57a6fba5.json");
 
 var message = {
-  data: {
-    score: '850',
-    time: '2:45'
+  notification:{
+    title:"FCM Message",
+    body:"This is an FCM Message"
   },
   token: 'eCq-YabAQVSt-YKdxWLiJG:APA91bFPjaGoal3Pj4MZRTRYQnAM8UrZjPx5QHToH65idO8K-IzaVj1DiKNFhD7eJPcfynBOYrHBDUv5FtrF7kMTtXMF8JcjOAsYQrX7AdofZ4J0A5tnywTmGux6HsrrKfsvIaQGUFe8'
 };
