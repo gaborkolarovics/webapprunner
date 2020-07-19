@@ -1,5 +1,5 @@
 /**
- * WebAppRunner - sendPushNotification cloude function
+ * WebAppRunner - sendPushNotification cloud function
  * 
  * @author Gábor KOLÁROVICS
  * @since 2020.07.19
@@ -42,21 +42,7 @@ function isBlank(str) {
  * 
  * @param {Request} request 
  */
-function resolvMessage(request) {
-  if (request.header('Content-Type') === 'application/x-www-form-urlencoded') {
-    return messageFromFormPost(request);
-  } else if (request.header('Content-Type') === 'application/json') {
-    return request.body;
-  }
-  throw new Error('Supported content type is "application/x-www-form-urlencoded" or "application/json"!');
-}
-
-/**
- * Read message data from "Form post request"
- * 
- * @param {Request} request 
- */
-function messageFromFormPost(request) {
+function resolveNotificationFromRequest(request) {
   if (isBlank(request.body.token)) {
     throw new Error('Token is empty!');
   }
@@ -76,51 +62,26 @@ function messageFromFormPost(request) {
   };
 }
 
-exports.helloWorld = functions.https.onRequest((request, response) => {
-  var message = {
-    notification: {
-      title: "FCM Message",
-      body: "This is an FCM Message"
-    },
-    token: 'eCq-YabAQVSt-YKdxWLiJG:APA91bFPjaGoal3Pj4MZRTRYQnAM8UrZjPx5QHToH65idO8K-IzaVj1DiKNFhD7eJPcfynBOYrHBDUv5FtrF7kMTtXMF8JcjOAsYQrX7AdofZ4J0A5tnywTmGux6HsrrKfsvIaQGUFe8'
-  };
-  console.log("Test body: " + request.body.key1);
-  // Send a message to the device corresponding to the provided
-  // registration token.
-  var fcmRespons = admin.messaging().send(message)
-    .then((response) => {
-      // Response is a message ID string.
-      console.log('Successfully sent message:', response);
-      return "ok";
-    })
-    .catch((error) => {
-      console.log('Error sending message:', error);
-      return 'error';
-    });
-
-  response.send('Hello from Firebase! req: ' + request.body.key1 + ' - fcm: ' + fcmRespons);
-});
-
 /**
- * SendPusNotification cloude function
+ * SendPusNotification cloud function
  */
 exports.sendPushNotification = functions.https.onRequest((request, response) => {
   let message;
   try {
-    message = resolvMessage(request);
+    message = resolveNotificationFromRequest(request);
   } catch (error) {
-    response.status(400).json({ message: 'Error resolve message:' + error });
+    response.status(400).json({ message: 'Error resolve message: ' + error });
     return;
   }
   console.log('Message: ' + message);
   admin.messaging().send(message)
     .then((result) => {
-      response.status(200).json({ message: 'Successfully sent message:' + result });
+      response.status(200).json({ message: 'Successfully sent message: ' + result });
       return result;
     })
     .catch((error) => {
       console.log('Error sending message:', error);
-      response.status(500).json({ message: 'Error sending message:' + error });
+      response.status(500).json({ message: 'Error sending message: ' + error });
       return error;
     });
 

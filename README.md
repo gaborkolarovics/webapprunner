@@ -41,9 +41,9 @@ Test:
 
 ```bash
 
-$ curl -X POST -d key1=aaa https://us-central1-webapprunner-1093.cloudfunctions.net/helloWorld
-
 $ curl -v -X POST -d token=eCq-YabAQVSt-YKdxWLiJG:APA91bFPjaGoal3Pj4MZRTRYQnAM8UrZjPx5QHToH65idO8K-IzaVj1DiKNFhD7eJPcfynBOYrHBDUv5FtrF7kMTtXMF8JcjOAsYQrX7AdofZ4J0A5tnywTmGux6HsrrKfsvIaQGUFe8 -d title=Alma -d message=nincs https://us-central1-webapprunner-1093.cloudfunctions.net/sendPushNotification
+
+$ curl -v -X POST -d '{"token":"eCq-YabAQVSt-YKdxWLiJG:APA91bFPjaGoal3Pj4MZRTRYQnAM8UrZjPx5QHToH65idO8K-IzaVj1DiKNFhD7eJPcfynBOYrHBDUv5FtrF7kMTtXMF8JcjOAsYQrX7AdofZ4J0A5tnywTmGux6HsrrKfsvIaQGUFe8","title":"Test msg","message":"Kiskutya"}' -H "Content-Type: application/json" https://us-central1-webapprunner-1093.cloudfunctions.net/sendPushNotification
 
 ```
 
