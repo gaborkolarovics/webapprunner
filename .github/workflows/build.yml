@@ -3,7 +3,7 @@ name: Android Feature Branch CI
 on:
   push:
     branches:
-    - '*'
+    - 'feature/**'
     - '!master' 
     - '!release*'
 
