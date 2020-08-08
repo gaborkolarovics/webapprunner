@@ -44,7 +44,7 @@ public class CaptureSignature extends Activity {
             orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
         }
 
-        this.setRequestedOrientation(orientation);
+        setRequestedOrientation(orientation);
 
         mContent = findViewById(R.id.linearLayout);
         mSignature = new signature(this, null);

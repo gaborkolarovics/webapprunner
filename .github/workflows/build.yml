@@ -3,9 +3,7 @@ name: Feature Branch CI
 on:
   push:
     branches:
-    - 'feature/**'
-    - '!master' 
-    - '!release*'
+    - '!release/**'
 
 jobs:
   build:
