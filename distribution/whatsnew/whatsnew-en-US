@@ -1,0 +1,16 @@
+<en-US>
+2.0.0.b17
+* Push notification support
+
+1.9.0.b16
+* Application rate
+* Widget (http get)
+
+1.8.2.b15
+* NFC support
+* Shortcut bugfix and refactor
+
+Korábbi releasek:
+* Signature orientation config
+* Donation
+</en-US>
