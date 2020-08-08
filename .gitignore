@@ -2,5 +2,10 @@
 .gradle
 .DS_Store
 
+release.keystore.jks
+keystore.properties
+
 /app/build
 /app/google-services.json
+
+/build
