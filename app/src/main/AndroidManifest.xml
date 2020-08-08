@@ -59,7 +59,7 @@
         <activity
             android:name=".sign.CaptureSignature"
             android:label="@string/title_signature"
-            android:theme="@android:style/Theme.Dialog" />
+            android:theme="@style/Dialog" />
 
         <activity
             android:name=".WebAppFineLocation"
