@@ -1,6 +1,6 @@
 # WebAppRunner
 
-Extend your web application with android features
+Extend your webapp with native features!
 
 * Signature
 * Vibration
