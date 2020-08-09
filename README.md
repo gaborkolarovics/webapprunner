@@ -1,5 +1,7 @@
 # WebAppRunner
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=gaborkolarovics_webapprunner&metric=alert_status)](https://sonarcloud.io/dashboard?id=gaborkolarovics_webapprunner)![Release CI](https://github.com/gaborkolarovics/webapprunner/workflows/Release%20CI/badge.svg)
+
 Extend your webapp with native features!
 
 * Signature
