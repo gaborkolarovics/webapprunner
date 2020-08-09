@@ -1,9 +1,8 @@
 <en-US>
-2.0.1.b18
-* Android O sign screen orientation fix
-
-2.0.0.b17
-* Push notification support
+2.0
+* Donation bugfix (2.0.2.b19)
+* Android O sign screen orientation fix (2.0.1.b18)
+* Push notification support (2.0.0.b17)
 
 1.9.0.b16
 * Application rate
@@ -13,7 +12,7 @@
 * NFC support
 * Shortcut bugfix and refactor
 
-Korábbi releasek:
+Previous releases:
 * Signature orientation config
 * Donation
 </en-US>

@@ -1,9 +1,8 @@
 <hu-HU>
-2.0.1.b18
-* Android O aláíró képernyő tájolásának javítása
-
-2.0.0.b17
-* Push notification támogatás
+2.0
+* Adományozás hibajavítás (2.0.2.b19)
+* Android O aláíró képernyő tájolásának javítása (2.0.1.b18)
+* Push notification támogatás (2.0.0.b17)
 
 1.9.0.b16
 * Alkalmazás értékelés

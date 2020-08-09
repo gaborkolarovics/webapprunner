@@ -37,11 +37,6 @@ public class DonationActivity extends Activity
     private static final String[] CATALOG_DEBUG = new String[]{"android.test.purchased", "android.test.canceled", "android.test.refunded", "android.test.item_unavailable"};
 
 	/**
-	 * isDebug
-	 */
-	private static final boolean mDebug = true;
-
-	/**
 	 * Product selector spinner
 	 */
 	private Spinner skuSpinner;
@@ -77,19 +72,19 @@ public class DonationActivity extends Activity
 	}
 
 	/**
-	 * Produce Sku product cataloge
+	 * Produce Sku product cataloge nice name
 	 * 
 	 * @return String aray
 	 */
 	protected String[] getCatalog()
 	{
-		if (mDebug)
+		if (isDebug())
 		{
 			return CATALOG_DEBUG;
 		}
 		else
 		{
-			return CATALOG_GOOGLE;
+			return getResources().getStringArray(R.array.donation_google_catalog_values);
 		}
 	}
 
@@ -100,7 +95,14 @@ public class DonationActivity extends Activity
 	 */
 	protected String getSkuProductId(final int index)
 	{
-		return getCatalog()[index];
+		if (isDebug())
+		{
+			return CATALOG_DEBUG[index];
+		}
+		else
+		{
+			return CATALOG_GOOGLE[index];
+		}
 	}
 	
 	/**
@@ -148,7 +150,7 @@ public class DonationActivity extends Activity
 	 */
 	protected void log(final String msg)
 	{
-		if (mDebug)
+		if (isDebug())
 		{
 			Log.d(TAG, msg);
 		}
@@ -170,12 +172,20 @@ public class DonationActivity extends Activity
 		{
 			iabHelper = new IabHelper(this, GOOGLE_PUBKEY);
 			// enable debug logging (for a production application, you should set this to false).
-			iabHelper.enableDebugLogging(mDebug);
+			iabHelper.enableDebugLogging(isDebug());
 			iabHelper.startSetup(new SetupFinisListener(this));
 		}
 
 		Button btGoogle = findViewById(R.id.donations__google_android_market_donate_button);
 		btGoogle.setOnClickListener(new DonateClickListener(this));
+	}
+
+	/**
+	 * The build type is debug
+	 * @return boolean : false in production release
+	 */
+	private boolean isDebug() {
+		return "true".equalsIgnoreCase(getResources().getString(R.string.donate_debug));
 	}
 
 	@Override
