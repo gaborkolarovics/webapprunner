@@ -3,7 +3,7 @@ name: Feature Branch CI
 on:
   push:
     branches:
-    - '!release/**'
+    - '**'
 
 jobs:
   build:
@@ -21,8 +21,18 @@ jobs:
       env:
         FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
       run: echo $FIREBASE_CONFIG > app/google-services.json
+    - name: Decode keystore
+      run: |
+        echo "${{ secrets.RELEASE_KEYSTORE }}" > release.keystore.asc
+        gpg -d --passphrase "${{ secrets.RELEASE_KEYSTORE_PASS }}" --batch release.keystore.asc > release.keystore.jks
+        echo "${{ secrets.RELEASE_KEYSTORE_PROPS }}" > keystore.properties.asc
+        gpg -d --passphrase "${{ secrets.RELEASE_KEYSTORE_PASS }}" --batch keystore.properties.asc > keystore.properties
     - name: Run Android Linter
       run: ./gradlew :app:lint
+    - name: Run SonarCloud scan
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: ./gradlew sonarqube
     - name: Assemble Debug APK
       run: ./gradlew :app:assembleDebug
-      
