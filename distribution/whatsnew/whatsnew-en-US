@@ -1,5 +1,6 @@
 <en-US>
 2.0
+* Allow HTTP pages (2.0.3.b20)
 * Donation bugfix (2.0.2.b19)
 * Android O sign screen orientation fix (2.0.1.b18)
 * Push notification support (2.0.0.b17)
