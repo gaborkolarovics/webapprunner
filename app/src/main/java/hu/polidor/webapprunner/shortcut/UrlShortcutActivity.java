@@ -136,7 +136,7 @@ public class UrlShortcutActivity extends Activity
 		if (store == null)
 		{
 			store = new ShortcutDto();
-			store.setDefaultIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
+			store.setDefaultIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
 		}
 		return store;
 	}

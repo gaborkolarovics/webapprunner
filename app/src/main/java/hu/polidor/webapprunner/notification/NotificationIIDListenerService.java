@@ -66,7 +66,7 @@ public class NotificationIIDListenerService extends FirebaseMessagingService {
         Notification.Builder notificationBuilder = new Notification.Builder(this)
                 .setContentTitle(notification.getTitle())
                 .setContentText(notification.getBody())
-                .setSmallIcon(R.drawable.ic_launcher)
+                .setSmallIcon(R.drawable.ic_stat_notification)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent);
 

@@ -8,6 +8,9 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
+import java.util.Arrays;
+import java.util.Locale;
+
 import hu.polidor.webapprunner.R;
 
 /**
@@ -49,7 +52,7 @@ public class HttpGetErrorResponseListener implements Response.ErrorListener
 		NetworkResponse netwotkResponse = error.networkResponse;
 		if (netwotkResponse != null)
 		{
-			errorMsg = String.format("(%d) %s", netwotkResponse.statusCode, netwotkResponse.data);
+			errorMsg = String.format(Locale.getDefault(), "(%d) %s", netwotkResponse.statusCode, Arrays.toString(netwotkResponse.data));
 		}
 
 		AppWidgetManager manager = AppWidgetManager.getInstance(context);

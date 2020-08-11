@@ -21,7 +21,7 @@ public class WebAppRunnerApplication extends Application
 	public void onCreate()
 	{
 		super.onCreate();
-		AppRate.getInstance().monitor(this);
+		AppRate.monitor(this);
 		JobManager.create(this).addJobCreator(new ApplicationJobCreator());
 		FirebaseApp.initializeApp(this);
 	}

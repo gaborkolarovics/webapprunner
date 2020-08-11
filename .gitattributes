@@ -1,0 +1,44 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Java sources
+*.java          text eol=crlf diff=java
+*.xml           text eol=crlf diff=html
+
+# JavaScript sources
+*.js            text eol=crlf diff=java
+
+# SiteBuild files
+*.css           text eol=crlf
+*.svg           text
+
+# DevOps files
+*.sh            text eol=lf
+*.so            binary
+gradlew         text eol=lf
+
+# These files are binary and should be left untouched
+# (binary is a macro for -text -diff)
+*.class         binary
+*.dll           binary
+*.ear           binary
+*.jar           binary
+*.so            binary
+*.war           binary
+
+# Fonts
+*.eot           binary
+*.otf           binary
+*.ttf           binary
+*.woff          binary
+*.woff2         binary
+
+# Docs
+LICENSE         text
+*.md            text
+
+###### Git
+.gitattributes  text
+.gitignore      text
+.gitconfig      text
+.gitmodules     text

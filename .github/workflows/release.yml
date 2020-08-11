@@ -5,7 +5,7 @@ on:
     types: [released]
 
 jobs:
-  build:
+  release:
 
     runs-on: ubuntu-latest
 
@@ -28,6 +28,11 @@ jobs:
         gpg -d --passphrase "${{ secrets.RELEASE_KEYSTORE_PASS }}" --batch keystore.properties.asc > keystore.properties
     - name: Run Android Linter
       run: ./gradlew :app:lint
+    - name: Run SonarCloud scan
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: ./gradlew sonarqube
     - name: Assemble Release APK
       run: ./gradlew :app:assembleRelease
     - name: Upload Android Release to Play Store
