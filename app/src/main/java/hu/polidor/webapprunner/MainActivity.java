@@ -120,7 +120,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        AppRate.ShowRateDialogIfConditionsApply(this);
+        AppRate.showRateDialogIfConditionsApply(this);
     }
 
     @Override

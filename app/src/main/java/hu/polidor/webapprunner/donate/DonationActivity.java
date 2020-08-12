@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import hu.polidor.webapprunner.BuildConfig;
 import hu.polidor.webapprunner.R;
 import hu.polidor.webapprunner.donate.google.util.IabHelper;
 
@@ -78,7 +79,7 @@ public class DonationActivity extends Activity
 	 */
 	protected String[] getCatalog()
 	{
-		if (isDebug())
+		if (BuildConfig.DEBUG)
 		{
 			return CATALOG_DEBUG;
 		}
@@ -95,7 +96,7 @@ public class DonationActivity extends Activity
 	 */
 	protected String getSkuProductId(final int index)
 	{
-		if (isDebug())
+		if (BuildConfig.DEBUG)
 		{
 			return CATALOG_DEBUG[index];
 		}
@@ -150,7 +151,7 @@ public class DonationActivity extends Activity
 	 */
 	protected void log(final String msg)
 	{
-		if (isDebug())
+		if (BuildConfig.DEBUG)
 		{
 			Log.d(TAG, msg);
 		}
@@ -172,20 +173,12 @@ public class DonationActivity extends Activity
 		{
 			iabHelper = new IabHelper(this, GOOGLE_PUBKEY);
 			// enable debug logging (for a production application, you should set this to false).
-			iabHelper.enableDebugLogging(isDebug());
+			iabHelper.enableDebugLogging(BuildConfig.DEBUG);
 			iabHelper.startSetup(new SetupFinisListener(this));
 		}
 
 		Button btGoogle = findViewById(R.id.donations__google_android_market_donate_button);
 		btGoogle.setOnClickListener(new DonateClickListener(this));
-	}
-
-	/**
-	 * The build type is debug
-	 * @return boolean : false in production release
-	 */
-	private boolean isDebug() {
-		return "true".equalsIgnoreCase(getResources().getString(R.string.donate_debug));
 	}
 
 	@Override

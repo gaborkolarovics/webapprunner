@@ -3,6 +3,7 @@ name: Feature Branch CI
 on:
   push:
     branches:
+    - '!master'
     - '**'
 
 jobs:

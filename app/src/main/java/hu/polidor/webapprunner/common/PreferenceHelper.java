@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Prefrences manager class with default value
@@ -168,7 +169,7 @@ public class PreferenceHelper
 	public static String getInstallDateForHumans(final Context context)
 	{
 		final long installDate = getInstallDate(context);
-		SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd", Locale.US);
 		return df.format(new Date(installDate));
 	}
 

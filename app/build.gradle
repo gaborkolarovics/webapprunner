@@ -16,6 +16,7 @@ android {
         targetSdkVersion 29
         versionCode 20
         versionName "2.0.3.b20"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     signingConfigs {
@@ -27,16 +28,21 @@ android {
         }
     }
 
+    lintOptions {
+        textReport true
+        xmlReport false
+    }
+
     buildTypes {
         release {
-            resValue 'string', 'donate_debug', '"false"'
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
-        debug {
-            resValue 'string', 'donate_debug', '"true"'
-        }
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
     }
 }
 
@@ -52,4 +58,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:17.4.4'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
 }
