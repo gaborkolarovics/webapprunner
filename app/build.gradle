@@ -7,6 +7,8 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
 
+    namespace 'hu.polidor.webapprunner'
+
     compileSdkVersion 33
 
     defaultConfig {
@@ -27,7 +29,6 @@ android {
         }
     }
 
-
     buildTypes {
         release {
             minifyEnabled true
@@ -39,14 +40,15 @@ android {
     testOptions {
         unitTests.returnDefaultValues = true
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    namespace 'hu.polidor.webapprunner'
+
     lint {
         textReport true
-        xmlReport false
+        xmlReport true
     }
 }
 
