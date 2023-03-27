@@ -19,7 +19,8 @@ jobs:
       with:
         distribution: 'adopt'
         java-version: 11
-    - uses: actions/setup-node@v3
+    - name: set up Node 16
+      uses: actions/setup-node@v3
       with:
         node-version: 16
     - name: Decode google-services.json
@@ -38,6 +39,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: ./gradlew sonarqube
+      run: ./gradlew --debiug sonarqube
     - name: Assemble Debug APK
       run: ./gradlew :app:assembleDebug
