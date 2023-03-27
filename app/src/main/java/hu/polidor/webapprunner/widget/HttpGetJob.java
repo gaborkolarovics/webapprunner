@@ -1,5 +1,7 @@
 package hu.polidor.webapprunner.widget;
 
+import static com.android.volley.Request.Method.GET;
+
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
@@ -24,8 +26,6 @@ import java.util.concurrent.TimeUnit;
 import hu.polidor.webapprunner.R;
 import hu.polidor.webapprunner.common.PreferenceHelper;
 
-import static com.android.volley.Request.Method.GET;
-
 /**
  * HttpGet widget scheduled job manager
  *
@@ -39,13 +39,6 @@ public class HttpGetJob extends Job {
      */
     public static final String JOB_TAG = "widget_httpget_sync_job";
 
-    @NonNull
-    @Override
-    protected Result onRunJob(@NonNull Params params) {
-        updateWidgets(getContext());
-        return Result.SUCCESS;
-    }
-
     /**
      * Scheduled HttpGet widget job
      */
@@ -56,13 +49,7 @@ public class HttpGetJob extends Job {
             return;
         }
 
-        new JobRequest.Builder(JOB_TAG)
-                .setPeriodic(TimeUnit.MINUTES.toMillis(15), TimeUnit.MINUTES.toMillis(5))
-                .setUpdateCurrent(true)
-                .setRequiredNetworkType(JobRequest.NetworkType.CONNECTED)
-                .setRequirementsEnforced(true)
-                .build()
-                .schedule();
+        new JobRequest.Builder(JOB_TAG).setPeriodic(TimeUnit.MINUTES.toMillis(15), TimeUnit.MINUTES.toMillis(5)).setUpdateCurrent(true).setRequiredNetworkType(JobRequest.NetworkType.CONNECTED).setRequirementsEnforced(true).build().schedule();
     }
 
     /**
@@ -96,12 +83,23 @@ public class HttpGetJob extends Job {
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, id);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
-            PendingIntent pending = PendingIntent.getActivity(context, 0, intent, 0);
+            int intentFlag = 0;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+                intentFlag = PendingIntent.FLAG_MUTABLE;
+            }
+            PendingIntent pending = PendingIntent.getActivity(context, 0, intent, intentFlag);
             views.setOnClickPendingIntent(R.id.widget_httpget_config, pending);
 
             manager.updateAppWidget(id, views);
         }
 
+    }
+
+    @NonNull
+    @Override
+    protected Result onRunJob(@NonNull Params params) {
+        updateWidgets(getContext());
+        return Result.SUCCESS;
     }
 
 }

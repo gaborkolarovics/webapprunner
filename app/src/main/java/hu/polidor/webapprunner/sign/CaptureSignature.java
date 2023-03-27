@@ -16,7 +16,6 @@ import android.util.AttributeSet;
 import android.util.Base64;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -56,36 +55,30 @@ public class CaptureSignature extends Activity {
         mCancel = findViewById(R.id.cancel);
         mView = mContent;
 
-        mClear.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                mSignature.clear();
-                mGetSign.setEnabled(false);
-            }
+        mClear.setOnClickListener(v -> {
+            mSignature.clear();
+            mGetSign.setEnabled(false);
         });
 
-        mGetSign.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                mView.setDrawingCacheEnabled(true);
-                String urlImage = mSignature.save(mView);
-                Bundle b = new Bundle();
-                b.putString(MainActivity.SIGNATURE_STATUS, MainActivity.SIGNATURE_STATUS_DONE);
-                b.putString(MainActivity.SIGNATURE_URLIMAGE, urlImage);
-                Intent intent = new Intent();
-                intent.putExtras(b);
-                setResult(RESULT_OK, intent);
-                finish();
-            }
+        mGetSign.setOnClickListener(v -> {
+            mView.setDrawingCacheEnabled(true);
+            String urlImage = mSignature.save(mView);
+            Bundle b = new Bundle();
+            b.putString(MainActivity.SIGNATURE_STATUS, MainActivity.SIGNATURE_STATUS_DONE);
+            b.putString(MainActivity.SIGNATURE_URLIMAGE, urlImage);
+            Intent intent = new Intent();
+            intent.putExtras(b);
+            setResult(RESULT_OK, intent);
+            finish();
         });
 
-        mCancel.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                Bundle b = new Bundle();
-                b.putString(MainActivity.SIGNATURE_STATUS, MainActivity.SIGNATURE_STATUS_CANCEL);
-                Intent intent = new Intent();
-                intent.putExtras(b);
-                setResult(RESULT_OK, intent);
-                finish();
-            }
+        mCancel.setOnClickListener(v -> {
+            Bundle b = new Bundle();
+            b.putString(MainActivity.SIGNATURE_STATUS, MainActivity.SIGNATURE_STATUS_CANCEL);
+            Intent intent = new Intent();
+            intent.putExtras(b);
+            setResult(RESULT_OK, intent);
+            finish();
         });
 
     }
@@ -94,8 +87,8 @@ public class CaptureSignature extends Activity {
         private static final float STROKE_WIDTH = 5f;
         private static final float HALF_STROKE_WIDTH = STROKE_WIDTH / 2;
         private final RectF dirtyRect = new RectF();
-        private Paint paint = new Paint();
-        private Path path = new Path();
+        private final Paint paint = new Paint();
+        private final Path path = new Path();
         private float lastTouchX;
         private float lastTouchY;
 
@@ -164,10 +157,7 @@ public class CaptureSignature extends Activity {
                     return false;
             }
 
-            invalidate((int) (dirtyRect.left - HALF_STROKE_WIDTH),
-                    (int) (dirtyRect.top - HALF_STROKE_WIDTH),
-                    (int) (dirtyRect.right + HALF_STROKE_WIDTH),
-                    (int) (dirtyRect.bottom + HALF_STROKE_WIDTH));
+            invalidate((int) (dirtyRect.left - HALF_STROKE_WIDTH), (int) (dirtyRect.top - HALF_STROKE_WIDTH), (int) (dirtyRect.right + HALF_STROKE_WIDTH), (int) (dirtyRect.bottom + HALF_STROKE_WIDTH));
 
             lastTouchX = eventX;
             lastTouchY = eventY;

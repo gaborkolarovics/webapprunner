@@ -1,6 +1,5 @@
 package hu.polidor.webapprunner;
 
-import android.content.Context;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -20,12 +19,12 @@ public class WebAppWebViewClient extends WebViewClient
     private boolean localURL;
     private String appUrl;
 	private String lastUrl;
-	private SwipeRefreshLayout swipeRL;
+	private final SwipeRefreshLayout swipeRefreshLayout;
 
-    public WebAppWebViewClient(ProgressBar pbStatus, SwipeRefreshLayout swipeRL)
+    public WebAppWebViewClient(ProgressBar pbStatus, SwipeRefreshLayout swipeRefreshLayout)
 	{
         this.pbStatus = pbStatus;
-		this.swipeRL = swipeRL;
+		this.swipeRefreshLayout = swipeRefreshLayout;
     }
 
 	public void setAppUrl(String appUrl)
@@ -57,7 +56,7 @@ public class WebAppWebViewClient extends WebViewClient
     public void onPageFinished(WebView view, String url)
 	{
         pbStatus.setVisibility(View.INVISIBLE);
-		swipeRL.setRefreshing(false);
+		swipeRefreshLayout.setRefreshing(false);
         setLocalUrl(url);
 		setLastUrl(url);
         super.onPageFinished(view, url);

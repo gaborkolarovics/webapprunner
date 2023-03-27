@@ -1,7 +1,6 @@
 package hu.polidor.webapprunner;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,8 +9,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -21,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import hu.polidor.webapprunner.common.Utils;
 
@@ -35,7 +33,7 @@ public class WebAppFineLocation extends Activity implements LocationListener {
     TextView tvAcc;
     boolean isGPSEnabled = false;
     boolean isNetworkEnabled = false;
-    SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+    SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss", Locale.ENGLISH);
     int minDistance;
     int minTimeout;
 
@@ -69,18 +67,10 @@ public class WebAppFineLocation extends Activity implements LocationListener {
         tvLoc = findViewById(R.id.tvLocation);
         tvTime = findViewById(R.id.tvTime);
 
-        btnCancel.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                cancelLocation();
-            }
-        });
+        btnCancel.setOnClickListener(v -> cancelLocation());
 
         btnOk.setEnabled(false);
-        btnOk.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                saveLocation();
-            }
-        });
+        btnOk.setOnClickListener(v -> saveLocation());
 
         minDistance = this.getIntent().getIntExtra(MainActivity.FINELOCATION_MINDIST, 50);
         minTimeout = this.getIntent().getIntExtra(MainActivity.FINELOCATION_MINTIME, 30);

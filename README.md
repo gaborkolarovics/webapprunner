@@ -1,6 +1,6 @@
 # WebAppRunner
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=gaborkolarovics_webapprunner&metric=alert_status)](https://sonarcloud.io/dashboard?id=gaborkolarovics_webapprunner)![Release CI](https://github.com/gaborkolarovics/webapprunner/workflows/Release%20CI/badge.svg)
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=gaborkolarovics_webapprunner) | [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=gaborkolarovics_webapprunner&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=gaborkolarovics_webapprunner) | [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=gaborkolarovics_webapprunner&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=gaborkolarovics_webapprunner) | [![Release CI](https://github.com/gaborkolarovics/webapprunner/actions/workflows/release.yml/badge.svg)](https://github.com/gaborkolarovics/webapprunner/actions/workflows/release.yml)
 
 Extend your webapp with native features!
 
