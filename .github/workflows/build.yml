@@ -39,6 +39,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: ./gradlew --debiug sonarqube
+      run: ./gradlew --debug sonarqube
     - name: Assemble Debug APK
       run: ./gradlew :app:assembleDebug
