@@ -1,9 +1,9 @@
 package hu.polidor.webapprunner;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -16,13 +16,8 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
-import androidx.annotation.NonNull;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -60,6 +55,7 @@ public class MainActivity extends Activity {
 
     private Context mContext;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,24 +76,13 @@ public class MainActivity extends Activity {
         if (Utils.isPlayServicesAvailable(this)) {
 
             FirebaseMessaging.getInstance().setAutoInitEnabled(true);
-            FirebaseInstanceId.getInstance().getInstanceId()
-                    .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                            if (task.isSuccessful()) {
-                                // Get new Instance ID token
-                                String token = task.getResult().getToken();
-                                PreferenceHelper.setC2mToken(MainActivity.this, token);
-                            }
-                        }
-                    });
+            FirebaseMessaging.getInstance().getToken().addOnSuccessListener(token -> PreferenceHelper.setC2mToken(MainActivity.this, token));
         }
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setBuiltInZoomControls(false);
         webSettings.setSaveFormData(false);
-        webSettings.setSavePassword(false);
         webSettings.setAllowUniversalAccessFromFileURLs(true);
         webView.clearCache(true);
         webView.addJavascriptInterface(new WebAppJsProxy(this), "WebAppRunner");
@@ -111,13 +96,10 @@ public class MainActivity extends Activity {
             webView.restoreState(savedInstanceState);
         }
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                pbStatus.setProgress(0);
-                pbStatus.setVisibility(View.VISIBLE);
-                webView.reload();
-            }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            pbStatus.setProgress(0);
+            pbStatus.setVisibility(View.VISIBLE);
+            webView.reload();
         });
 
         AppRate.showRateDialogIfConditionsApply(this);
@@ -211,48 +193,32 @@ public class MainActivity extends Activity {
             builder.setView(exitView);
             builder.setMessage(R.string.question_exit)
                     .setCancelable(false)
-                    .setPositiveButton(R.string.base_yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            finish();
-                        }
-                    })
-                    .setNegativeButton(R.string.base_no, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
+                    .setPositiveButton(R.string.base_yes, (dialog, id) -> finish())
+                    .setNegativeButton(R.string.base_no, (dialog, id) -> dialog.cancel());
             final AlertDialog alert = builder.create();
-            btnRefresh.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    alert.dismiss();
-                    pbStatus.setProgress(0);
-                    pbStatus.setVisibility(View.VISIBLE);
-                    webView.reload();
-                }
+            btnRefresh.setOnClickListener(v -> {
+                alert.dismiss();
+                pbStatus.setProgress(0);
+                pbStatus.setVisibility(View.VISIBLE);
+                webView.reload();
             });
-            btnSettings.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    alert.dismiss();
-                    Intent i = new Intent();
-                    i.setClass(mContext, WebAppSettings.class);
-                    startActivity(i);
-                }
+            btnSettings.setOnClickListener(v -> {
+                alert.dismiss();
+                Intent i = new Intent();
+                i.setClass(mContext, WebAppSettings.class);
+                startActivity(i);
             });
-            btnShortcut.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    alert.dismiss();
-                    Intent i = new Intent();
-                    i.setClass(mContext, UrlShortcutActivity.class);
-                    startActivity(i);
-                }
+            btnShortcut.setOnClickListener(v -> {
+                alert.dismiss();
+                Intent i = new Intent();
+                i.setClass(mContext, UrlShortcutActivity.class);
+                startActivity(i);
             });
-            btnDonation.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    alert.dismiss();
-                    Intent i = new Intent();
-                    i.setClass(mContext, DonationActivity.class);
-                    startActivity(i);
-                }
+            btnDonation.setOnClickListener(v -> {
+                alert.dismiss();
+                Intent i = new Intent();
+                i.setClass(mContext, DonationActivity.class);
+                startActivity(i);
             });
 
             alert.show();
