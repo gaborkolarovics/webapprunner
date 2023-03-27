@@ -14,8 +14,8 @@ android {
         applicationId "hu.polidor.webapprunner"
         minSdkVersion 16
         targetSdkVersion 33
-        versionCode 20
-        versionName "2.0.3.b20"
+        versionCode 21
+        versionName "2.0.4.b21"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
