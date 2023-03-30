@@ -24,9 +24,7 @@ jobs:
       with:
         node-version: 16
     - name: Decode google-services.json
-      env:
-        FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
-      run: echo $FIREBASE_CONFIG > app/google-services.json
+      run: echo "${{ secrets.FIREBASE_CONFIG }}" > app/google-services.json
     - name: Decode keystore
       run: |
         echo "${{ secrets.RELEASE_KEYSTORE }}" > release.keystore.asc
@@ -39,6 +37,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: ./gradlew --stacktrace sonarqube
+      run: ./gradlew sonarqube
     - name: Assemble Debug APK
       run: ./gradlew :app:assembleDebug

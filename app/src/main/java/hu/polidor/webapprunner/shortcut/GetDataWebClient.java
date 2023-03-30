@@ -10,31 +10,28 @@ import android.widget.ProgressBar;
  * @author Gábor KOLÁROVICS
  * @since 2018.11.01
  */
-public class GetDataWebClient extends WebViewClient
-{
+public class GetDataWebClient extends WebViewClient {
 
-	/**
-	 * Parent activity
-	 */
-	private UrlShortcutActivity urlShortcut;
+    /**
+     * Parent activity
+     */
+    private final UrlShortcutActivity urlShortcut;
 
-	/**
-	 * Consrtuctor
-	 */
-	public GetDataWebClient(final UrlShortcutActivity urlShortcut)
-	{
-		this.urlShortcut = urlShortcut;
-	}
+    /**
+     * Consrtuctor
+     */
+    public GetDataWebClient(final UrlShortcutActivity urlShortcut) {
+        this.urlShortcut = urlShortcut;
+    }
 
-	@Override
-	public void onPageFinished(WebView view, String url)
-	{
-		urlShortcut.getProgressBar().setVisibility(ProgressBar.INVISIBLE);
-		urlShortcut.getEtUrl().setText(url);
-		urlShortcut.getStore().setUrl(url);
-		urlShortcut.getBtnGetData().setEnabled(true);
-		urlShortcut.enableAddIconBtn();
-		super.onPageFinished(view, url);
-	}
+    @Override
+    public void onPageFinished(WebView view, String url) {
+        urlShortcut.getProgressBar().setVisibility(ProgressBar.INVISIBLE);
+        urlShortcut.getEtUrl().setText(url);
+        urlShortcut.getStore().setUrl(url);
+        urlShortcut.getBtnGetData().setEnabled(true);
+        urlShortcut.enableAddIconBtn();
+        super.onPageFinished(view, url);
+    }
 
 }

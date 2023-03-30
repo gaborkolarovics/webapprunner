@@ -14,16 +14,14 @@ import hu.polidor.webapprunner.rate.AppRate;
  * @author Gábor KOLÁROVICS
  * @since 2018.12.05
  */
-public class WebAppRunnerApplication extends Application
-{
+public class WebAppRunnerApplication extends Application {
 
-	@Override
-	public void onCreate()
-	{
-		super.onCreate();
-		AppRate.monitor(this);
-		JobManager.create(this).addJobCreator(new ApplicationJobCreator());
-		FirebaseApp.initializeApp(this);
-	}
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        AppRate.monitor(this);
+        JobManager.create(this).addJobCreator(new ApplicationJobCreator());
+        FirebaseApp.initializeApp(this);
+    }
 
 }

@@ -2,32 +2,27 @@ package hu.polidor.webapprunner.nfc;
 
 import java.io.Serializable;
 
-public class TagRecord implements Serializable
-{
-	
-	private String mimeType;
+public class TagRecord implements Serializable {
 
-	private String data;
+    private String mimeType;
 
-	public void setMimeType(String mimeType)
-	{
-		this.mimeType = mimeType;
-	}
+    private String data;
 
-	public String getMimeType()
-	{
-		return mimeType;
-	}
+    public void setMimeType(String mimeType) {
+        this.mimeType = mimeType;
+    }
 
-	public void setData(String data)
-	{
-		this.data = data;
-	}
+    public String getMimeType() {
+        return mimeType;
+    }
 
-	public String getData()
-	{
-		return data;
-	}
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public String getData() {
+        return data;
+    }
 
 }
 

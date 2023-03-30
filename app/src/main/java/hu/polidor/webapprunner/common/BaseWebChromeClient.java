@@ -6,33 +6,30 @@ import android.widget.ProgressBar;
 
 /**
  * Base WebChromeClient with ProgressBar
- *
+ * <p>
  * Implemented onProgressChanged method, and update progress
  *
  * @author Gábor KOLÁROVOCS
  * @since 2018.11.01
  */
-public class BaseWebChromeClient extends WebChromeClient
-{
+public class BaseWebChromeClient extends WebChromeClient {
 
-	/**
-	 * ProgressBar reference
-	 */
-	private ProgressBar progressBar;
+    /**
+     * ProgressBar reference
+     */
+    private final ProgressBar progressBar;
 
-	/**
-	 * Construtor with ProgressBar
-	 */
-	public BaseWebChromeClient(final ProgressBar progressBar)
-	{
-		this.progressBar = progressBar;
-	}
+    /**
+     * Constructor with ProgressBar
+     */
+    public BaseWebChromeClient(final ProgressBar progressBar) {
+        this.progressBar = progressBar;
+    }
 
-	@Override
-	public void onProgressChanged(WebView view, int newProgress)
-	{
-		progressBar.setProgress(newProgress);
-		super.onProgressChanged(view, newProgress);
-	}
+    @Override
+    public void onProgressChanged(WebView view, int newProgress) {
+        progressBar.setProgress(newProgress);
+        super.onProgressChanged(view, newProgress);
+    }
 
 }

@@ -11,38 +11,34 @@ import android.widget.ProgressBar;
  * @author Gábor KOLÁROVICS
  * @since 2018.10.22
  */
-public class GetDataListener implements OnClickListener
-{
+public class GetDataListener implements OnClickListener {
 
-	/**
-	 * Parent activity
-	 */
-	private UrlShortcutActivity urlShortcut;
+    /**
+     * Parent activity
+     */
+    private final UrlShortcutActivity urlShortcut;
 
-	/**
-	 * Constructor with parent activity
-	 */
-	public GetDataListener(UrlShortcutActivity urlShortcut)
-	{
-		this.urlShortcut = urlShortcut;
-	}
+    /**
+     * Constructor with parent activity
+     */
+    public GetDataListener(UrlShortcutActivity urlShortcut) {
+        this.urlShortcut = urlShortcut;
+    }
 
-	@Override
-	public void onClick(View view)
-	{
-		urlShortcut.getBtnGetData().setEnabled(false);
-		urlShortcut.getProgressBar().setVisibility(ProgressBar.VISIBLE);
+    @Override
+    public void onClick(View view) {
+        urlShortcut.getBtnGetData().setEnabled(false);
+        urlShortcut.getProgressBar().setVisibility(ProgressBar.VISIBLE);
 
-		String url = urlShortcut.getEtUrl().getText().toString();
-		if (!url.contains("://"))
-		{
-		  	url = "http://" + url.trim();
-		}
+        String url = urlShortcut.getEtUrl().getText().toString();
+        if (!url.contains("://")) {
+            url = "http://" + url.trim();
+        }
 
-		WebView wvPage = new WebView(urlShortcut);
-		wvPage.setWebViewClient(new GetDataWebClient(urlShortcut));
-		wvPage.setWebChromeClient(new GetDataChromeClient(urlShortcut));
-		wvPage.loadUrl(url);
-	}
+        WebView wvPage = new WebView(urlShortcut);
+        wvPage.setWebViewClient(new GetDataWebClient(urlShortcut));
+        wvPage.setWebChromeClient(new GetDataChromeClient(urlShortcut));
+        wvPage.loadUrl(url);
+    }
 
 }

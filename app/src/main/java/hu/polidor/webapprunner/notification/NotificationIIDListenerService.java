@@ -45,7 +45,7 @@ public class NotificationIIDListenerService extends FirebaseMessagingService {
      * Create and show a simple notification containing the received FCM message.
      *
      * @param notificationManager current notification manager
-     * @param remoteMessage        FCM message body received.
+     * @param remoteMessage       FCM message body received.
      */
     private void sendNotification(final NotificationManager notificationManager, final RemoteMessage remoteMessage) {
 

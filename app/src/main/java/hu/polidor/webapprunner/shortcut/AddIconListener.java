@@ -10,11 +10,11 @@ import android.view.View.OnClickListener;
 
 import androidx.annotation.RequiresApi;
 
+import java.util.UUID;
+
 import hu.polidor.webapprunner.MainActivity;
 import hu.polidor.webapprunner.R;
 import hu.polidor.webapprunner.common.Utils;
-
-import java.util.UUID;
 
 /**
  * Create shortcut

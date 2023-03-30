@@ -11,26 +11,24 @@ import hu.polidor.webapprunner.R;
  * @author Gábor KOLÁROVICS
  * @since 2018.11.19
  */
-public final class DialogManager
-{
+public final class DialogManager {
 
-	/**
-	 * Show rate dialog
-	 *
-	 * @param activity Application activity
-	 */
-	public static void show(final Activity activity)
-	{
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		builder.setMessage(R.string.rate_dialog_message);
-		builder.setTitle(R.string.rate_dialog_title);
+    /**
+     * Show rate dialog
+     *
+     * @param activity Application activity
+     */
+    public static void show(final Activity activity) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setMessage(R.string.rate_dialog_message);
+        builder.setTitle(R.string.rate_dialog_title);
 
-		builder.setPositiveButton(R.string.rate_dialog_ok, new PositiveAnswer(activity));
-		builder.setNegativeButton(R.string.rate_dialog_no, new NegativeAnswer(activity));
-		builder.setNeutralButton(R.string.rate_dialog_cancel, new NeutralAnswer(activity));
+        builder.setPositiveButton(R.string.rate_dialog_ok, new PositiveAnswer(activity));
+        builder.setNegativeButton(R.string.rate_dialog_no, new NegativeAnswer(activity));
+        builder.setNeutralButton(R.string.rate_dialog_cancel, new NeutralAnswer(activity));
 
-		builder.setCancelable(true);
-		builder.show();
-	}
+        builder.setCancelable(true);
+        builder.show();
+    }
 
 }

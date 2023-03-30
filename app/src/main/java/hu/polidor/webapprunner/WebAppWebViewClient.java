@@ -12,39 +12,33 @@ import java.net.URL;
 
 // import android.support.v4.widget.SwipeRefreshLayout;
 
-public class WebAppWebViewClient extends WebViewClient
-{
+public class WebAppWebViewClient extends WebViewClient {
 
     ProgressBar pbStatus;
     private boolean localURL;
     private String appUrl;
-	private String lastUrl;
-	private final SwipeRefreshLayout swipeRefreshLayout;
+    private String lastUrl;
+    private final SwipeRefreshLayout swipeRefreshLayout;
 
-    public WebAppWebViewClient(ProgressBar pbStatus, SwipeRefreshLayout swipeRefreshLayout)
-	{
+    public WebAppWebViewClient(ProgressBar pbStatus, SwipeRefreshLayout swipeRefreshLayout) {
         this.pbStatus = pbStatus;
-		this.swipeRefreshLayout = swipeRefreshLayout;
+        this.swipeRefreshLayout = swipeRefreshLayout;
     }
 
-	public void setAppUrl(String appUrl)
-	{
-		this.appUrl = appUrl;
-	}
+    public void setAppUrl(String appUrl) {
+        this.appUrl = appUrl;
+    }
 
-	public void setLastUrl(String lastUrl)
-	{
-		this.lastUrl = lastUrl;
-	}
+    public void setLastUrl(String lastUrl) {
+        this.lastUrl = lastUrl;
+    }
 
-	public String getLastUrl()
-	{
-		return this.lastUrl;
-	}
+    public String getLastUrl() {
+        return this.lastUrl;
+    }
 
     @Override
-    public boolean shouldOverrideUrlLoading(WebView view, String url)
-	{
+    public boolean shouldOverrideUrlLoading(WebView view, String url) {
         pbStatus.setProgress(0);
         pbStatus.setVisibility(View.VISIBLE);
         setLocalUrl(url);
@@ -53,33 +47,27 @@ public class WebAppWebViewClient extends WebViewClient
     }
 
     @Override
-    public void onPageFinished(WebView view, String url)
-	{
+    public void onPageFinished(WebView view, String url) {
         pbStatus.setVisibility(View.INVISIBLE);
-		swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setRefreshing(false);
         setLocalUrl(url);
-		setLastUrl(url);
+        setLastUrl(url);
         super.onPageFinished(view, url);
     }
 
-    public boolean getLocalUrl()
-	{
+    public boolean getLocalUrl() {
         return localURL;
     }
 
-    public boolean setLocalUrl(String url)
-	{
-        try
-		{
+    public boolean setLocalUrl(String url) {
+        try {
             URL webappURL = new URL(appUrl);
             URL loadURL = new URL(url);
             this.localURL = webappURL.getHost().equalsIgnoreCase(loadURL.getHost());
-        }
-		catch (MalformedURLException e)
-		{
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
 
-		return this.localURL;
+        return this.localURL;
     }
 }
