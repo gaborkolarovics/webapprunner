@@ -8,55 +8,46 @@ import android.graphics.Bitmap;
  * @author Gábor Kolárovics
  * @since 2018.10.21
  */
-public class ShortcutDto
-{
+public class ShortcutDto {
 
-	private String url;
+    private String url;
 
-	private String title;
+    private String title;
 
-	private Bitmap icon;
+    private Bitmap icon;
 
-	private Bitmap defaultIcon;
+    private Bitmap defaultIcon;
 
-	public String getUrl()
-	{
-		return url;
-	}
+    public String getUrl() {
+        return url;
+    }
 
-	public void setUrl(final String url)
-	{
-		this.url = url;
-	}
+    public void setUrl(final String url) {
+        this.url = url;
+    }
 
-	public String getTitle()
-	{
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setTitle(final String title)
-	{
-		this.title = title;
-	}
+    public void setTitle(final String title) {
+        this.title = title;
+    }
 
-	public Bitmap getIcon()
-	{
-		return icon;
-	}
+    public Bitmap getIcon() {
+        return icon;
+    }
 
-	public Bitmap getScaledBitmapIcon()
-	{
-		return Bitmap.createScaledBitmap(icon == null ? defaultIcon : icon, 64, 64, true);
-	}
+    public Bitmap getScaledBitmapIcon() {
+        return Bitmap.createScaledBitmap(icon == null ? defaultIcon : icon, 64, 64, true);
+    }
 
-	public void setIcon(final Bitmap icon)
-	{
-		this.icon = icon;
-	}
+    public void setIcon(final Bitmap icon) {
+        this.icon = icon;
+    }
 
-	public void setDefaultIcon(final Bitmap defaultIcon)
-	{
-		this.defaultIcon = defaultIcon;
-	}
+    public void setDefaultIcon(final Bitmap defaultIcon) {
+        this.defaultIcon = defaultIcon;
+    }
 
 }

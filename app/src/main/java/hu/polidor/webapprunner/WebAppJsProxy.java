@@ -20,7 +20,7 @@ import hu.polidor.webapprunner.sign.CaptureSignature;
 
 public class WebAppJsProxy {
 
-    private Activity activity = null;
+    private final Activity activity;
 
     public WebAppJsProxy(Activity activity) {
         this.activity = activity;
@@ -69,8 +69,8 @@ public class WebAppJsProxy {
                 v.vibrate(800);
                 break;
             case "PATTERN":
-                String[] arrstr = vibratePattern.split(",");
-                long[] pattern = convertPattern(arrstr);
+                String[] vibrations = vibratePattern.split(",");
+                long[] pattern = convertPattern(vibrations);
                 v.vibrate(pattern, -1);
                 break;
             default:

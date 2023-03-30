@@ -11,20 +11,17 @@ import hu.polidor.webapprunner.common.PreferenceHelper;
  * @author Gábor KOLÁROVICS
  * @since 2018.11.28
  */
-public class NegativeAnswer implements DialogInterface.OnClickListener
-{
+public class NegativeAnswer implements DialogInterface.OnClickListener {
 
-	private Activity activity;
+    private final Activity activity;
 
-	public NegativeAnswer(final Activity activity)
-	{
-		this.activity = activity;
-	}
+    public NegativeAnswer(final Activity activity) {
+        this.activity = activity;
+    }
 
-	@Override
-	public void onClick(DialogInterface dialogInterface, int action)
-	{
-		PreferenceHelper.setRateDialogApproved(activity, true);
-	}
+    @Override
+    public void onClick(DialogInterface dialogInterface, int action) {
+        PreferenceHelper.setRateDialogApproved(activity, true);
+    }
 
 }

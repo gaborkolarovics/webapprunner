@@ -1,6 +1,9 @@
 package hu.polidor.webapprunner.common;
 
+import static hu.polidor.webapprunner.Const.TAG;
+
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Build;
 import android.preference.Preference;
@@ -14,8 +17,6 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
-
-import static hu.polidor.webapprunner.Const.TAG;
 
 /**
  * Common util methods
@@ -47,7 +48,10 @@ public final class Utils {
         int status = googleApiAvailability.isGooglePlayServicesAvailable(activity);
         if (status != ConnectionResult.SUCCESS) {
             if (googleApiAvailability.isUserResolvableError(status)) {
-                googleApiAvailability.getErrorDialog(activity, status, PLAY_SERVICES_RESOLUTION_REQUEST).show();
+                Dialog dialog = googleApiAvailability.getErrorDialog(activity, status, PLAY_SERVICES_RESOLUTION_REQUEST);
+                if (dialog != null) {
+                    dialog.show();
+                }
             }
             return false;
         }
@@ -61,14 +65,7 @@ public final class Utils {
      */
     public static String getUUID() {
         final String cpuAbi = getABIs();
-        final String szDevIDShort = "35" +
-                (Build.BOARD.length() % 10) +
-                (Build.BRAND.length() % 10) +
-                (cpuAbi.length() % 10) +
-                (Build.DEVICE.length() % 10) +
-                (Build.MANUFACTURER.length() % 10) +
-                (Build.MODEL.length() % 10) +
-                (Build.PRODUCT.length() % 10);
+        final String szDevIDShort = "35" + (Build.BOARD.length() % 10) + (Build.BRAND.length() % 10) + (cpuAbi.length() % 10) + (Build.DEVICE.length() % 10) + (Build.MANUFACTURER.length() % 10) + (Build.MODEL.length() % 10) + (Build.PRODUCT.length() % 10);
         return new UUID(szDevIDShort.hashCode(), getBuildSerial().hashCode()).toString();
     }
 
@@ -78,7 +75,7 @@ public final class Utils {
      * @return String supported ABIs
      */
     private static String getABIs() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && Build.SUPPORTED_ABIS.length > 0) {
+        if (Build.SUPPORTED_ABIS.length > 0) {
             return Build.SUPPORTED_ABIS[0];
         }
         return "NOT_FOUND_SUPPORTED_ABI";
@@ -92,19 +89,19 @@ public final class Utils {
      * @return boolean
      */
     public static boolean isOverDate(long targetDate, int threshold) {
-        return new Date().getTime() - targetDate >= threshold * ONE_DAY;
+        return new Date().getTime() - targetDate >= (long) threshold * ONE_DAY;
     }
 
     /**
      * Set preference summary
      *
-     * @param preferenceFregment The actual fregment
+     * @param preferenceFragment The actual fragment
      * @param id                 The modified preference
      * @param summary            The content
      * @param enabled            The preference has enabled
      */
-    public static void setSummary(final PreferenceFragment preferenceFregment, final String id, final String summary, final boolean enabled) {
-        Preference preference = preferenceFregment.findPreference(id);
+    public static void setSummary(final PreferenceFragment preferenceFragment, final String id, final String summary, final boolean enabled) {
+        Preference preference = preferenceFragment.findPreference(id);
         preference.setSummary(summary);
         preference.setEnabled(enabled);
     }
@@ -127,7 +124,7 @@ public final class Utils {
      */
     private static String getBuildSerial() {
         try {
-            return Build.class.getField("SERIAL").get(null).toString();
+            return Objects.requireNonNull(Build.class.getField("SERIAL").get(null)).toString();
         } catch (Exception exception) {
             return UUID.randomUUID().toString();
         }

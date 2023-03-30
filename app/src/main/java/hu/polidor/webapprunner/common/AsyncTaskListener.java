@@ -6,12 +6,11 @@ package hu.polidor.webapprunner.common;
  * @author Gábor KOLÁROVICS
  * @since 2018.11.01
  */
-public interface AsyncTaskListener<T>
-{
+public interface AsyncTaskListener<T> {
 
-	/**
-	 * Callback method
-	 */
-	void OnTaskCompleted(T object);
+    /**
+     * Callback method
+     */
+    void OnTaskCompleted(T object);
 
 }

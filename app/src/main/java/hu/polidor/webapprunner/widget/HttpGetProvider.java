@@ -9,14 +9,12 @@ import android.content.Context;
  * @author Gábor KOLÁROVICS
  * @since 2018.12.26
  */
-public class HttpGetProvider extends AppWidgetProvider
-{
+public class HttpGetProvider extends AppWidgetProvider {
 
-	@Override
-	public void onEnabled(Context context)
-	{
-		HttpGetJob.scheduleJob();
-		super.onEnabled(context);
-	}
+    @Override
+    public void onEnabled(Context context) {
+        HttpGetJob.scheduleJob();
+        super.onEnabled(context);
+    }
 
 }

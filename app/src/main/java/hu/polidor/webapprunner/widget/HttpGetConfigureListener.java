@@ -14,33 +14,30 @@ import hu.polidor.webapprunner.common.PreferenceHelper;
  * @author Gábor KOLÁROVICS
  * @since 2018.12.24
  */
-public class HttpGetConfigureListener implements OnClickListener
-{
+public class HttpGetConfigureListener implements OnClickListener {
 
-	/**
-	 * Parent activity
-	 */
-	private HttpGetConfigureActivity httpGetConfigure;
+    /**
+     * Parent activity
+     */
+    private final HttpGetConfigureActivity httpGetConfigure;
 
-	/**
-	 * Constructor with parent activity
-	 */
-	public HttpGetConfigureListener(final HttpGetConfigureActivity httpGetConfigure)
-	{
-		this.httpGetConfigure = httpGetConfigure;
-	}
+    /**
+     * Constructor with parent activity
+     */
+    public HttpGetConfigureListener(final HttpGetConfigureActivity httpGetConfigure) {
+        this.httpGetConfigure = httpGetConfigure;
+    }
 
-	@Override
-	public void onClick(View view)
-	{
-		PreferenceHelper.setHttpGetWidgetUtl(httpGetConfigure, httpGetConfigure.getWidgetId(), httpGetConfigure.getEtUrl().getText().toString());
+    @Override
+    public void onClick(View view) {
+        PreferenceHelper.setHttpGetWidgetUtl(httpGetConfigure, httpGetConfigure.getWidgetId(), httpGetConfigure.getEtUrl().getText().toString());
 
-		HttpGetJob.updateWidgets(httpGetConfigure);
+        HttpGetJob.updateWidgets(httpGetConfigure);
 
-		final Intent resultValue = new Intent();
-		resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, httpGetConfigure.getWidgetId());
-		httpGetConfigure.setResult(Activity.RESULT_OK, resultValue);
-		httpGetConfigure.finish();
-	}
+        final Intent resultValue = new Intent();
+        resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, httpGetConfigure.getWidgetId());
+        httpGetConfigure.setResult(Activity.RESULT_OK, resultValue);
+        httpGetConfigure.finish();
+    }
 
 }
