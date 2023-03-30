@@ -15,8 +15,8 @@ android {
         applicationId "hu.polidor.webapprunner"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 21
-        versionName "2.0.4.b21"
+        versionCode 22
+        versionName "2.0.5.b22"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -61,7 +61,7 @@ dependencies {
     implementation 'com.evernote:android-job:1.4.2'
     implementation 'com.google.code.gson:gson:2.8.9'
 	implementation 'com.google.firebase:firebase-messaging:23.1.2'
-    implementation 'com.google.firebase:firebase-analytics:21.2.0'
+    implementation 'com.google.firebase:firebase-analytics:21.2.1'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 

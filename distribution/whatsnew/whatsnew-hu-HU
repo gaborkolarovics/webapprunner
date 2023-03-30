@@ -1,19 +1,19 @@
 <hu-HU>
 2.0
+* Kód optimalizálás (2.0.5.b22)
+* Android 12 verzió támogatása (2.0.4.b21)
 * HTTP oldalak engedélyezése (2.0.3.b20)
 * Adományozás hibajavítás (2.0.2.b19)
-* Android O aláíró képernyő tájolásának javítása (2.0.1.b18)
+* Android 8 aláíró képernyő tájolásának javítása (2.0.1.b18)
 * Push notification támogatás (2.0.0.b17)
 
 1.9.0.b16
 * Alkalmazás értékelés
 * Widget (http get)
 
-1.8.2.b15
+Korábbi releasek:
 * NFC támogatás
 * Parancsikon hibajavítás, megújítás
-
-Korábbi releasek:
 * Aláírás képernyő forgatásának tiltása
 * Adományozás a fejlesztőnek
 </hu-HU>

@@ -17,7 +17,9 @@
         android:label="@string/app_name"
         android:resizeableActivity="false"
         android:usesCleartextTraffic="true"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="DataExtractionRules,GoogleAppIndexingWarning"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        tools:targetApi="s">
 
         <!-- [START fcm_default_channel] -->
         <meta-data
@@ -44,7 +46,6 @@
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize"
-            android:label="@string/app_name"
             android:launchMode="singleTask"
             android:exported="true">
             <intent-filter>
@@ -54,8 +55,7 @@
         </activity>
 
         <activity
-            android:name=".settings.WebAppSettings"
-            android:label="@string/app_name" />
+            android:name=".settings.WebAppSettings" />
 
         <activity
             android:name=".sign.CaptureSignature"

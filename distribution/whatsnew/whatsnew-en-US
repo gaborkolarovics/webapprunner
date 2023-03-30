@@ -1,19 +1,19 @@
 <en-US>
 2.0
+* Performance optimalization (2.0.5.b22)
+* Android 12 support (2.0.4.b21)
 * Allow HTTP pages (2.0.3.b20)
 * Donation bugfix (2.0.2.b19)
-* Android O sign screen orientation fix (2.0.1.b18)
+* Android 8 sign screen orientation fix (2.0.1.b18)
 * Push notification support (2.0.0.b17)
 
 1.9.0.b16
 * Application rate
 * Widget (http get)
 
-1.8.2.b15
+Previous releases:
 * NFC support
 * Shortcut bugfix and refactor
-
-Previous releases:
 * Signature orientation config
 * Donation
 </en-US>
