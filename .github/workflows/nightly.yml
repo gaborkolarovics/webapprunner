@@ -1,4 +1,4 @@
-name: Feature Branch CI
+name: Nightly build
 
 on:
   schedule:
