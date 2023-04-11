@@ -30,5 +30,6 @@ sonarqube {
     property "sonar.projectKey", "gaborkolarovics_webapprunner"
     property "sonar.organization", "gaborkolarovics"
     property "sonar.host.url", "https://sonarcloud.io"
+    property "sonar.ignoreFontFamilies", "FontAwesome"
   }
 }
