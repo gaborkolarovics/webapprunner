@@ -24,7 +24,6 @@ import com.google.zxing.integration.android.IntentResult;
 
 import hu.polidor.webapprunner.common.PreferenceHelper;
 import hu.polidor.webapprunner.common.Utils;
-import hu.polidor.webapprunner.donate.DonationActivity;
 import hu.polidor.webapprunner.rate.AppRate;
 import hu.polidor.webapprunner.settings.WebAppSettings;
 import hu.polidor.webapprunner.shortcut.UrlShortcutActivity;
@@ -189,7 +188,6 @@ public class MainActivity extends Activity {
             Button btnRefresh = exitView.findViewById(R.id.btnRefresh);
             Button btnSettings = exitView.findViewById(R.id.btnSettings);
             Button btnShortcut = exitView.findViewById(R.id.btnShortcut);
-            Button btnDonation = exitView.findViewById(R.id.btnDonation);
             builder.setView(exitView);
             builder.setMessage(R.string.question_exit)
                     .setCancelable(false)
@@ -212,12 +210,6 @@ public class MainActivity extends Activity {
                 alert.dismiss();
                 Intent i = new Intent();
                 i.setClass(mContext, UrlShortcutActivity.class);
-                startActivity(i);
-            });
-            btnDonation.setOnClickListener(v -> {
-                alert.dismiss();
-                Intent i = new Intent();
-                i.setClass(mContext, DonationActivity.class);
                 startActivity(i);
             });
 

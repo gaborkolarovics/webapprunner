@@ -61,7 +61,7 @@ public class NotificationIIDListenerService extends FirebaseMessagingService {
         }
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
-                PendingIntent.FLAG_ONE_SHOT);
+                PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
 
         Notification.Builder notificationBuilder = new Notification.Builder(this)
                 .setContentTitle(notification.getTitle())
