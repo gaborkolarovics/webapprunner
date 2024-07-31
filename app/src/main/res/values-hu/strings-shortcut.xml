@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="favicon_content_description">Az alkalmazásod ikonja</string>
+    <string name="urlshortcut_title">Cím</string>
 </resources>

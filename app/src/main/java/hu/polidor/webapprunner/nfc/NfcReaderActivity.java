@@ -43,7 +43,7 @@ public class NfcReaderActivity extends Activity {
             if (!mNfcAdapter.isEnabled()) {
                 mTextView.setText(R.string.nfc_disabled);
             } else {
-                mPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+                mPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), PendingIntent.FLAG_IMMUTABLE);
                 mTextView.setText(R.string.nfc_waiting);
             }
         }
