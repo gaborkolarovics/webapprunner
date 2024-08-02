@@ -1,5 +1,7 @@
 <hu-HU>
 2.0
+* Android 13 verzió támogatása (2.0.5.b23)
+* Adományozás eltávolítása (2.0.5.b23)
 * Kód optimalizálás (2.0.5.b22)
 * Android 12 verzió támogatása (2.0.4.b21)
 * HTTP oldalak engedélyezése (2.0.3.b20)
@@ -7,9 +9,9 @@
 * Android 8 aláíró képernyő tájolásának javítása (2.0.1.b18)
 * Push notification támogatás (2.0.0.b17)
 
-1.9.0.b16
-* Alkalmazás értékelés
-* Widget (http get)
+1.9
+* Alkalmazás értékelés (1.9.0.b16)
+* Widget http get (1.9.0.b16)
 
 Korábbi releasek:
 * NFC támogatás
