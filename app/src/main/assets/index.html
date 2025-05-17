@@ -180,6 +180,17 @@
                 </button>
             </div>
 
+            <div class="col-sm-4 portfolio-item">
+                <button href="#portfolioModal7" class="portfolio-link" data-toggle="modal">
+                    <div class="caption">
+                        <div class="caption-content text-uppercase">
+                            Phone
+                        </div>
+                    </div>
+                    <img src="img/portfolio/info.png" class="img-responsive" alt="">
+                </button>
+            </div>
+
         </div>
     </div>
 </section>
@@ -613,6 +624,41 @@ function setSignatureImage(imgimage) {
     </div>
 </div>
 
+<!-- MODAL 7 INFO -->
+<div class="portfolio-modal modal fade" id="portfolioModal7" tabindex="-1" role="dialog"
+     aria-hidden="true">
+    <div class="modal-content">
+        <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+                <div class="rl">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="modal-body">
+                        <h2>Telefon</h2>
+                        <hr class="star-primary"/>
+                        <p>Telefonszám: <input type="text" id="phoneNumber"/></p>
+                        <br/>
+                        <button type="button" class="btn btn-default" onclick="Call()">Call number</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><em
+                                class="fa fa-times"></em> Close
+                        </button>
+                        <code>
+                            if (typeof WebAppRunner !== 'undefined') {<br/>
+                                WebAppRunner.call("tel:+36101231234");<br/>
+                            } else {<br/>
+                                alert("WebAppRunner not defined :(");<br/>
+                            }<br/>
+                        </code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
