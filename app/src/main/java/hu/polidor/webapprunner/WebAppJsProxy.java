@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Vibrator;
 import android.webkit.JavascriptInterface;
 
@@ -121,6 +122,13 @@ public class WebAppJsProxy {
     public void scanNfc() {
         Intent intent = new Intent(activity, NfcReaderActivity.class);
         activity.startActivityForResult(intent, MainActivity.NFCREADER_ACTIVITY);
+    }
+
+    @JavascriptInterface
+    public void call(final String phoneNumber) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse(phoneNumber));
+        activity.startActivity(intent);
     }
 
     private long[] convertPattern(String[] string) {

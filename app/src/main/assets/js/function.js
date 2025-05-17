@@ -11,6 +11,18 @@ function GetToken() {
 	}
 }
 
+function Call() {
+    if (typeof WebAppRunner !== 'undefined')
+    {
+        var phoneNumber = document.getElementById("phoneNumber").value;
+        WebAppRunner.call("tel:"+phoneNumber);
+    }
+	else
+	{
+		alert("WebAppRunner not defined :(");
+	}
+}
+
 function SendMessage() {
 	if (typeof WebAppRunner !== 'undefined')
 	{
